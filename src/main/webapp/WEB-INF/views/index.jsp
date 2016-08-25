@@ -2,16 +2,49 @@
  <!DOCTYPE html>
  <html>
  <head>
+   <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+
  	<title>Robot</title>
- 	<link rel='stylesheet' href='<c:url value="/resources/css/style.css" />' type='text/css' media='all' />
+ 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
  </head>
  <body>
- 	<h2>Hello World, Spring MVC</h2>
+ 	<h2>Book robot</h2>
 
- 	<c:forEach var="bookInfo" items="${books}">
+    <div class="tableContainer">
+        <div class="container">
+            <div class="masthead buffer">
+                <h3 class="text-muted">Books from Empik</h3>
+            </div>
 
-    				<li>${bookInfo}</li>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Library</th>
+                    <th>Tags</th>
+                </tr>
+                </thead>
+                <tbody>
+                <c:forEach var="bookInfo" items="${books}">
+                    <tr>
+                        <td>${bookInfo}</td>
+                        <td>Someone</td>
+                        <td>Something</td>
+                        <td>....$</td>
+                        <td>http://www.empik.com/ebooki</td>
+                        <td>Some tag</td>
+                    </tr>
+                </c:forEach>
 
-    </c:forEach>
+                </tbody>
+            </table>
+
+        </div>
+
  </body>
  </html>

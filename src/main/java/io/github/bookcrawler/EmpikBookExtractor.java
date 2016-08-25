@@ -16,7 +16,7 @@ import java.util.Set;
 public class EmpikBookExtractor implements BookExtractor {
 
     public Iterable<BookInfo> extract() throws IOException {
-        Connection connect = Jsoup.connect("http://www.empik.com/ebooki/promocje/");
+        Connection connect = Jsoup.connect("http://www.empik.com/ebooki/promocje/").timeout(10000);
         Set<BookInfo> books = new HashSet<BookInfo>();
 
 
