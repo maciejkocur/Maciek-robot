@@ -2,33 +2,42 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>ja.crawler.spring</groupId>
+    <groupId>io.github.bookcrawler</groupId>
     <artifactId>robot</artifactId>
     <packaging>war</packaging>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>${project.version}</version>
     <name>Book robot</name>
+
     <properties>
         <java-version>1.8</java-version>
-        <org.springframework-version>4.3.0.RELEASE</org.springframework-version>
+        <spring-webmvc.version>4.3.0.RELEASE</spring-webmvc.version>
+        <javax.servlet-api.version>3.0.1</javax.servlet-api.version>
+        <jstl.version>1.2</jstl.version>
+        <tomcat7-maven-plugin.version>2.2</tomcat7-maven-plugin.version>
+        <maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>
+        <maven-war-plugin.version>2.4</maven-war-plugin.version>
+        <project.version>1.0</project.version>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
-            <version>${org.springframework-version}</version>
+            <version>${spring-webmvc.version}</version>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <version>3.0.1</version>
+            <version>${javax.servlet-api.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
-            <version>1.2</version>
+            <version>${jstl.version}</version>
         </dependency>
     </dependencies>
+
     <build>
         <finalName>Robot</finalName>
         <pluginManagement>
@@ -36,7 +45,7 @@
                 <plugin>
                     <groupId>org.apache.tomcat.maven</groupId>
                     <artifactId>tomcat7-maven-plugin</artifactId>
-                    <version>2.2</version>
+                    <version>${tomcat7-maven-plugin.version}</version>
                     <configuration>
                         <path>/</path>
                     </configuration>
@@ -44,7 +53,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>2.3.2</version>
+                    <version>${maven-compiler-plugin.version}</version>
                     <configuration>
                         <source>${java-version}</source>
                         <target>${java-version}</target>
@@ -53,7 +62,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-war-plugin</artifactId>
-                    <version>2.4</version>
+                    <version>${maven-war-plugin.version}</version>
                     <configuration>
                         <warSourceDirectory>src/main/webapp</warSourceDirectory>
                         <warName>robot</warName>
@@ -63,4 +72,5 @@
             </plugins>
         </pluginManagement>
     </build>
+
 </project>

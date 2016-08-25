@@ -1,4 +1,4 @@
-package ja.crawler.spring.controllers;
+package io.github.bookcrawler.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

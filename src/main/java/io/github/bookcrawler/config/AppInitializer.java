@@ -1,4 +1,4 @@
-package ja.crawler.spring.config;
+package io.github.bookcrawler.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 

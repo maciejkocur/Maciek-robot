@@ -1,4 +1,4 @@
-package ja.crawler.spring.config;
+package io.github.bookcrawler.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -12,7 +12,7 @@ import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "ja.crawler.spring")
+@ComponentScan(basePackages = "io.github.bookcrawler")
 public class ServletContextConfig extends WebMvcConfigurerAdapter {
     @Bean
     public ViewResolver viewResolver() {
