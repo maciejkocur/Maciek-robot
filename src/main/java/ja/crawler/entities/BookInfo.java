@@ -1,4 +1,4 @@
-package ja.crawler.Entities;
+package ja.crawler.entities;
 
 public class BookInfo {
 

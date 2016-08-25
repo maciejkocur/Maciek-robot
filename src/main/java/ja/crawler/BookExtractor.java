@@ -1,5 +1,5 @@
 package ja.crawler;
-import ja.crawler.Entities.BookInfo;
+import ja.crawler.entities.BookInfo;
 
 import java.io.IOException;
 
