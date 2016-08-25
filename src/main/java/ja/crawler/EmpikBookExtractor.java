@@ -1,3 +1,6 @@
+package ja.crawler;
+
+import ja.crawler.Entities.BookInfo;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
