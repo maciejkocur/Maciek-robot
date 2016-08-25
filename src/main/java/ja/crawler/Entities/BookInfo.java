@@ -1,4 +1,8 @@
+package ja.crawler.Entities;
+
 public class BookInfo {
+
+
     String title;
 
 
@@ -9,5 +13,13 @@ public class BookInfo {
     @Override
     public String toString() {
         return title;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }
