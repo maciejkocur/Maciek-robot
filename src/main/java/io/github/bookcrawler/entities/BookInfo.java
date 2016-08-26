@@ -2,9 +2,7 @@ package io.github.bookcrawler.entities;
 
 public class BookInfo {
 
-
     String title;
-
 
     public BookInfo(String title) {
         this.title = title;
@@ -22,4 +20,6 @@ public class BookInfo {
     public void setTitle(String title) {
         this.title = title;
     }
+
+
 }
