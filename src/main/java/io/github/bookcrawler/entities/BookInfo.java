@@ -1,4 +1,4 @@
-package ja.crawler.entities;
+package io.github.bookcrawler.entities;
 
 public class BookInfo {
 

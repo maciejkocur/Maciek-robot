@@ -1,6 +1,6 @@
-package ja.crawler;
+package io.github.bookcrawler;
 
-import ja.crawler.entities.BookInfo;
+import io.github.bookcrawler.entities.BookInfo;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

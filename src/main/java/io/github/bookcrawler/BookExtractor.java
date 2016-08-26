@@ -1,5 +1,5 @@
-package ja.crawler;
-import ja.crawler.entities.BookInfo;
+package io.github.bookcrawler;
+import io.github.bookcrawler.entities.BookInfo;
 
 import java.io.IOException;
 

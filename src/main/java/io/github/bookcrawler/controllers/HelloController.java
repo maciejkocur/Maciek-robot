@@ -1,17 +1,15 @@
 package io.github.bookcrawler.controllers;
 
-import ja.crawler.BookExtractor;
-import ja.crawler.EmpikBookExtractor;
-import ja.crawler.entities.BookInfo;
+import io.github.bookcrawler.BookExtractor;
+import io.github.bookcrawler.EmpikBookExtractor;
+import io.github.bookcrawler.entities.BookInfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 @Controller
