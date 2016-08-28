@@ -1,5 +1,6 @@
 package io.github.bookcrawler;
 
+import io.github.bookcrawler.entities.BookInfoBuilder;
 import io.github.bookcrawler.entities.BookInfo;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -54,7 +55,7 @@ public class EmpikBookExtractor implements BookExtractor {
 
     private BookInfo getBook(Document aClass) {
         String text = aClass.getElementsByAttributeValue("class", "productMainTitle").get(0).text();
-        return new BookInfo(text);
+        return new BookInfo(new BookInfoBuilder().title(text));
     }
 }
 
