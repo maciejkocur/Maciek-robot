@@ -1,4 +1,4 @@
-# robot
+# Maciek-robot
 Screen scraping project for e-libraries
 
 ##Contributors
