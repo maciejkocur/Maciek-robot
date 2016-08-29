@@ -9,7 +9,7 @@ Damian,
 Maciek
 
 ####Master branch build status:
-[![Build Status](https://travis-ci.org/maciejkocur/robot.svg?branch=master)](https://travis-ci.org/maciejkocur/robot)
+[![Build Status](https://travis-ci.org/maciejkocur/Maciek-robot.svg?branch=master)](https://travis-ci.org/maciejkocur/Maciek-robot)
 
 ### Usage (from command line)
 
