@@ -76,11 +76,11 @@
            <tbody>
               <c:forEach var="bookInfo" items="${books}">
                  <tr>
-                    <td>${bookInfo}</td>
-                    <td>Someone</td>
-                    <td>Something</td>
-                    <td>....$</td>
-                    <td>http://www.empik.com/ebooki</td>
+                    <td>${bookInfo.getTitle()}</td>
+                    <td>${bookInfo.getAuthor()}</td>
+                    <td>${bookInfo.getDescription()}</td>
+                    <td>${bookInfo.getPrice()}</td>
+                    <td>${bookInfo.getUrl()}</td>
                     <td>Some tag</td>
                  </tr>
               </c:forEach>

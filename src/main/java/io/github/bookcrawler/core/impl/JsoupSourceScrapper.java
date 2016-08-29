@@ -7,6 +7,7 @@ import org.jsoup.nodes.Document;
 import java.io.IOException;
 
 public class JsoupSourceScrapper implements SourceScrapper {
+    // TODO: need to handle exception in better way, right now null value passed to SourceScrappingResult
 
     @Override
     public SourceScrappingResult scrap(String url) {

@@ -13,14 +13,4 @@ public class DiscountFetchingService {
                 .flatMap(b -> b.extractor().extract().parallelStream())
                 .collect(Collectors.toList());
     }
-
-    public static void main(String[] args) {
-        final long start = System.currentTimeMillis();
-        Collection<BookStore> booksStores = new ArrayList<>();
-        booksStores.add(BookStore.EMPIK);
-        Collection<BookInfo> books = new DiscountFetchingService().fetch(booksStores);
-        books.forEach(System.out::println);
-        System.out.println(books.size());
-        System.out.println(System.currentTimeMillis() - start);
-    }
 }

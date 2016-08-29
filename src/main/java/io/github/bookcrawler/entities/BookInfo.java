@@ -2,6 +2,7 @@ package io.github.bookcrawler.entities;
 
 public class BookInfo {
 
+
     private String title;
     private String author;
     private String description;
@@ -28,7 +29,24 @@ public class BookInfo {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public String getAuthor() {
+        return author;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public String getLibrary() {
+        return library;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
 }
