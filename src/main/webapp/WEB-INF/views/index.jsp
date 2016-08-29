@@ -36,8 +36,8 @@
      <li class="dropdown">
        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Library to search books<b class="caret"></b></a>
        <ul class="dropdown-menu" role="menu">
-         <li><a href="#">Empik</a></li>
-         <li><a href="#">Another site</a></li>
+         <li><a href="../fetch/Empik">Empik</a></li>
+         <li><a href="../fetch/Empik">Another site</a></li>
          <li><a href="#">Yet another site</a></li>
          <li class="divider"></li>
          <li><a href="#">Most popular site</a></li>
@@ -53,39 +53,9 @@
           <input type="password" name="password" placeholder="Password" class="form-control">
         </div>
           <button type="submit" class="btn btn-success">Sign in</button>
-          <a href="../registration.html" class="btn btn-success">Sign up</a>
+          <a href="../../registration.html" class="btn btn-success">Sign up</a>
      </form>
    </ul>
  </div><!-- /.navbar-collapse -->
-
-    <div class="tableContainer">
-       <div class="masthead buffer">
-          <h3 class="text-muted">Books from Empik</h3>
-       </div>
-        <table class="table table-striped">
-           <thead>
-              <tr>
-                 <th>Title</th>
-                 <th>Author</th>
-                 <th>Description</th>
-                 <th>Price</th>
-                 <th>Library</th>
-                 <th>Tags</th>
-              </tr>
-           </thead>
-           <tbody>
-              <c:forEach var="bookInfo" items="${books}">
-                 <tr>
-                    <td>${bookInfo.getTitle()}</td>
-                    <td>${bookInfo.getAuthor()}</td>
-                    <td>${bookInfo.getDescription()}</td>
-                    <td>${bookInfo.getPrice()}</td>
-                    <td>${bookInfo.getUrl()}</td>
-                    <td>Some tag</td>
-                 </tr>
-              </c:forEach>
-           </tbody>
-        </table>
-    </div>
    </body>
  </html>
