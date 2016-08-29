@@ -2,42 +2,42 @@ package io.github.bookcrawler.core.impl;
 
 import io.github.bookcrawler.core.BooksLinkCrawler;
 import io.github.bookcrawler.core.SourceScrapper;
+import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.Collection;
-import java.util.LinkedHashSet;
+import java.util.Collections;
 import java.util.stream.Collectors;
 
 import static io.github.bookcrawler.core.BookStore.EMPIK;
 
 public class EmpikBookLinksCrawler implements BooksLinkCrawler {
-    private final SourceScrapper sourceScrapper;
-
-    public EmpikBookLinksCrawler(SourceScrapper sourceScrapper) {
-        this.sourceScrapper = sourceScrapper;
-    }
 
     @Override
-    public Collection<String> crawl() {
+    public Collection<String> crawl(String url, SourceScrapper sourceScrapper) {
 
-        return getSectionElements().parallelStream()
+        SourceScrappingResult sourceScrappingResult = sourceScrapper.scrap(url);
+        if (!sourceScrappingResult.isSuccessful()) {
+            return Collections.EMPTY_LIST;
+        }
+
+        return getSectionElements(sourceScrappingResult.getSource()).parallelStream()
+                .map(e -> sourceScrapper.scrap(getLink(href(e))))
+                .filter(SourceScrappingResult::isSuccessful)
+                .map(SourceScrappingResult::getSource)
                 .flatMap(e -> getBookElements(e).parallelStream())
                 .filter(e -> !href(e).isEmpty())
                 .map(e -> getLink(href(e)))
-                .collect(Collectors.toCollection(LinkedHashSet::new));
+                .collect(Collectors.toList());
     }
 
-    private Elements getBookElements(Element e) {
-        return sourceScrapper.scrap(getLink(href(e)))
-                .getSource()
-                .getElementsByAttributeValue("class", "productBox-450Pic");
+    private Elements getBookElements(Document source) {
+        return source.getElementsByAttributeValue("class", "productBox-450Pic");
     }
 
-    private Elements getSectionElements() {
-        return sourceScrapper.scrap(EMPIK.startUrl())
-                .getSource()
-                .getElementsByAttributeValue("class", "more_lnk");
+    private Elements getSectionElements(Document source) {
+        return source.getElementsByAttributeValue("class", "more_lnk");
     }
 
     private String getLink(String i) {

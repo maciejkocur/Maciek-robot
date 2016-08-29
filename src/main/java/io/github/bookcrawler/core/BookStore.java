@@ -1,8 +1,8 @@
 package io.github.bookcrawler.core;
 
-import io.github.bookcrawler.core.impl.EmpikBooksExtractor;
 import io.github.bookcrawler.core.impl.EmpikBookInfoParser;
 import io.github.bookcrawler.core.impl.EmpikBookLinksCrawler;
+import io.github.bookcrawler.core.impl.EmpikBooksExtractor;
 import io.github.bookcrawler.core.impl.JsoupSourceScrapper;
 
 public enum BookStore {
@@ -20,17 +20,17 @@ public enum BookStore {
 
         @Override
         public BookExtractor extractor() {
-            return new EmpikBooksExtractor();
+            return new EmpikBooksExtractor(new JsoupSourceScrapper());
         }
 
         @Override
         public BooksLinkCrawler crawler() {
-            return new EmpikBookLinksCrawler(new JsoupSourceScrapper());
+            return new EmpikBookLinksCrawler();
         }
 
         @Override
-        public EmpikBookInfoParser parser() {
-            return new EmpikBookInfoParser(new JsoupSourceScrapper());
+        public BookInfoParser parser() {
+            return new EmpikBookInfoParser();
         }
     };
 
