@@ -1,7 +1,8 @@
-package io.github.bookcrawler.core.impl;
+package io.github.bookcrawler.core.impl.empik;
 
 import io.github.bookcrawler.core.BookExtractor;
 import io.github.bookcrawler.core.SourceScrapper;
+import io.github.bookcrawler.core.impl.SourceScrappingResult;
 import io.github.bookcrawler.entities.BookInfo;
 
 import java.util.List;

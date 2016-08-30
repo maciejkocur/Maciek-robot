@@ -1,9 +1,9 @@
 package io.github.bookcrawler.core;
 
-import io.github.bookcrawler.core.impl.EmpikBookInfoParser;
-import io.github.bookcrawler.core.impl.EmpikBookLinksCrawler;
-import io.github.bookcrawler.core.impl.EmpikBooksExtractor;
 import io.github.bookcrawler.core.impl.JsoupSourceScrapper;
+import io.github.bookcrawler.core.impl.empik.EmpikBookInfoParser;
+import io.github.bookcrawler.core.impl.empik.EmpikBookLinksCrawler;
+import io.github.bookcrawler.core.impl.empik.EmpikBooksExtractor;
 
 public enum BookStore {
 
