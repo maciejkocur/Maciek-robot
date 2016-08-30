@@ -15,10 +15,49 @@
       $('dropdown-toggle').dropdown()
         });
     </script>
+
  </head>
 
  <body>
-  <%@ include file="index.jsp" %>
+  <nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+       <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+         <button type="button" class="navbar-toggle" data-toggle="collapse" data-    target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+         </button>
+      </div>
+
+   <!-- Collect the nav links, forms, and other content for toggling -->
+   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+     <ul class="nav navbar-nav">
+       <li class="dropdown">
+         <a class="dropdown-toggle" data-toggle="dropdown">Library to search books<b class="caret"></b></a>
+         <ul class="dropdown-menu" role="menu">
+           <li><a href="../fetch/Empik">Empik</a></li>
+           <li><a href="../fetch/Empik">Another site</a></li>
+           <li><a href="#">Yet another site</a></li>
+           <li class="divider"></li>
+           <li><a href="#">Most popular site</a></li>
+         </ul>
+       </li>
+     </ul>
+     <ul class="nav navbar-nav navbar-right">
+       <form action="login" method="post" class="navbar-form navbar-right">
+          <div class="form-group">
+            <input type="text" name="login" placeholder="login" class="form-control">
+          </div>
+          <div class="form-group">
+            <input type="password" name="password" placeholder="Password" class="form-control">
+          </div>
+            <button type="submit" class="btn btn-success">Sign in</button>
+            <a href="../../registration.html" class="btn btn-success">Sign up</a>
+       </form>
+     </ul>
+   </div><!-- /.navbar-collapse -->
 
     <div class="tableContainer">
        <div class="masthead buffer">
@@ -27,12 +66,52 @@
         <table class="table table-striped">
            <thead>
               <tr>
-                 <th>Title</th>
-                 <th>Author</th>
-                 <th>Description</th>
-                 <th>Price</th>
-                 <th>Library</th>
-                 <th>Tags</th>
+                <th>
+                     <li class="dropdown">
+                       <a class="dropdown-toggle" data-toggle="dropdown"> Title<b class="caret"></b></a>
+                         <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Sort in descending order</a></li>
+                            <li><a href="#">Sort in ascending order</a></li>
+                         </ul>
+                     </li>
+                </th>
+                <th>
+                     <li class="dropdown">
+                       <a class="dropdown-toggle" data-toggle="dropdown"> Author<b class="caret"></b></a>
+                         <ul class="dropdown-menu" role="menu">
+                           <li><a href="#">Sort in descending order</a></li>
+                           <li><a href="#">Sort in ascending order</a></li>
+                         </ul>
+                     </li>
+                </th>
+                <th>
+                       <li class="dropdown">
+                         <a class="dropdown-toggle" data-toggle="dropdown"> Price<b class="caret"></b></a>
+                           <ul class="dropdown-menu" role="menu">
+                             <li><a href="#">Sort in descending order</a></li>
+                             <li><a href="#">Sort in ascending order</a></li>
+                           </ul>
+                       </li>
+                  </th>
+                  <th>
+                     <li class="dropdown">
+                       <a>Reference to book</a>
+                     </li>
+                  </th>
+                  <th>
+                     <li class="dropdown">
+                       <a class="dropdown-toggle" data-toggle="dropdown">Category<b class="caret"></b></a>
+                     <ul class="dropdown-menu" role="menu">
+                                                  <li><a href="#">Sort in descending order</a></li>
+                                                  <li><a href="#">Sort in ascending order</a></li>
+                                                </ul>
+                     </li>
+                  </th>
+                <th>
+                     <li class="dropdown">
+                       <a>Description</a>
+                     </li>
+                </th>
               </tr>
            </thead>
            <tbody>
@@ -40,10 +119,10 @@
                  <tr>
                     <td>${bookInfo.getTitle()}</td>
                     <td>${bookInfo.getAuthor()}</td>
-                    <td>${bookInfo.getDescription()}</td>
                     <td>${bookInfo.getPrice()}</td>
                     <td>${bookInfo.getUrl()}</td>
-                    <td>Some tag</td>
+                    <td>Some_category </td>
+                    <td>${bookInfo.getDescription()}</td>
                  </tr>
               </c:forEach>
            </tbody>
