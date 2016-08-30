@@ -1,21 +1,19 @@
 package io.github.bookcrawler.entities;
 
+import java.util.Set;
+
 public class BookInfoBuilder {
 
     String title;
-    String author;
     String description;
     String price;
     String library;
     String url;
+    String author;
+    Set<Tag> tags;
 
     public BookInfoBuilder title(String title) {
         this.title = title;
-        return this;
-    }
-
-    public BookInfoBuilder author(String author) {
-        this.author = author;
         return this;
     }
 
@@ -40,7 +38,18 @@ public class BookInfoBuilder {
         return this;
     }
 
+    public BookInfoBuilder author(String author) {
+        this.author = author;
+        return this;
+    }
+
+    public BookInfoBuilder tags(Set<Tag> tags) {
+        this.tags = tags;
+        return this;
+    }
+
     public BookInfo build() {
         return new BookInfo(this);
     }
+
 }

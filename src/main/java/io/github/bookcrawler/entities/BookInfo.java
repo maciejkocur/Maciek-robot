@@ -1,33 +1,53 @@
 package io.github.bookcrawler.entities;
 
-public class BookInfo {
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Set;
 
+@Entity
+//TODO remeber to add Date field and create index on it
+public class BookInfo implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long ID;
 
     private String title;
-    private String author;
+
+    @Column(length = 10000)
     private String description;
+
     private String price;
+
     private String library;
+
     private String url;
 
-    public BookInfo(BookInfoBuilder builder) {
-        this.title = builder.title;
-        this.author = builder.author;
-        this.description = builder.description;
-        this.price = builder.price;
-        this.library = builder.library;
-        this.url = builder.url;
+    private String author;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<Tag> tags;
+
+    private BookInfo() {
     }
 
-    @Override
-    public String toString() {
-        return title + " | " + author + " | " + description.substring(0, 40) + "... | " + price + " | " + library + " - " + url;
+    public BookInfo(BookInfoBuilder bookInfoBuilder) {
+        this.title = bookInfoBuilder.title;
+        this.description = bookInfoBuilder.description;
+        this.price = bookInfoBuilder.price;
+        this.url = bookInfoBuilder.url;
+        this.library = bookInfoBuilder.library;
+        this.author = bookInfoBuilder.author;
+        this.tags = bookInfoBuilder.tags;
+    }
+
+    public Long getID() {
+        return ID;
     }
 
     public String getTitle() {
         return title;
     }
+
 
     public String getAuthor() {
         return author;
@@ -37,16 +57,20 @@ public class BookInfo {
         return description;
     }
 
+
     public String getPrice() {
         return price;
-    }
-
-    public String getLibrary() {
-        return library;
     }
 
     public String getUrl() {
         return url;
     }
 
+    public String getLibrary() {
+        return library;
+    }
+
+    public Set<Tag> getTags() {
+        return tags;
+    }
 }
