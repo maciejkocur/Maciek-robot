@@ -22,7 +22,8 @@ public class DiscountFetchingService {
         return fetch(EnumSet.of(BookStore.EMPIK));
     }
 
-    public List<BookInfo> getWoblinkBooks() {
+    public List<BookInfo> getPublioBooks() {
         return fetch(EnumSet.of(BookStore.PUBLIO));
     }
+
 }
