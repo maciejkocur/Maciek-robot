@@ -4,7 +4,7 @@ import io.github.bookcrawler.core.BookExtractor;
 import io.github.bookcrawler.core.SourceScrapper;
 import io.github.bookcrawler.entities.BookInfo;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import static io.github.bookcrawler.core.BookStore.EMPIK;
@@ -18,7 +18,7 @@ public class EmpikBooksExtractor implements BookExtractor {
     }
 
     @Override
-    public Collection<BookInfo> extract() {
+    public List<BookInfo> extract() {
         return EMPIK.crawler().crawl(EMPIK.startUrl(), sourceScrapper).parallelStream()
                 .map(url -> sourceScrapper.scrap(url))
                 .filter(SourceScrappingResult::isSuccessful)

@@ -6,8 +6,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import static io.github.bookcrawler.core.BookStore.EMPIK;
@@ -15,11 +15,11 @@ import static io.github.bookcrawler.core.BookStore.EMPIK;
 public class EmpikBookLinksCrawler implements BooksLinkCrawler {
 
     @Override
-    public Collection<String> crawl(String url, SourceScrapper sourceScrapper) {
+    public List<String> crawl(String url, SourceScrapper sourceScrapper) {
 
         SourceScrappingResult sourceScrappingResult = sourceScrapper.scrap(url);
         if (!sourceScrappingResult.isSuccessful()) {
-            return Collections.EMPTY_LIST;
+            return Collections.emptyList();
         }
 
         return getSectionElements(sourceScrappingResult.getSource()).parallelStream()
