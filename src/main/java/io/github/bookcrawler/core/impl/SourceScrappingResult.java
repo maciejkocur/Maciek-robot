@@ -11,11 +11,11 @@ public class SourceScrappingResult {
         this.status = status;
     }
 
-    boolean isSuccessful() {
+    public boolean isSuccessful() {
         return status == SourceScrappingStatus.SUCCESS;
     }
 
-    Document getSource() {
+    public Document getSource() {
         return source;
 
     }

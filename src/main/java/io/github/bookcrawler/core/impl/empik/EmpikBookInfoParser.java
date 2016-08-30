@@ -1,6 +1,7 @@
-package io.github.bookcrawler.core.impl;
+package io.github.bookcrawler.core.impl.empik;
 
 import io.github.bookcrawler.core.BookInfoParser;
+import io.github.bookcrawler.core.impl.SourceScrappingResult;
 import io.github.bookcrawler.entities.BookInfo;
 import io.github.bookcrawler.entities.BookInfoBuilder;
 import org.jsoup.nodes.Document;
