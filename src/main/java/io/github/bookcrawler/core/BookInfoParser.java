@@ -1,10 +1,10 @@
 package io.github.bookcrawler.core;
 
+import io.github.bookcrawler.core.impl.SourceScrappingResult;
 import io.github.bookcrawler.entities.BookInfo;
 
-import java.util.Collection;
-
+@FunctionalInterface
 public interface BookInfoParser {
-    //TODO: parsers should parse source, String, jSoup Document or Wrapper
-    Collection<BookInfo> parse(Collection<String> urls);
+
+    BookInfo parse(SourceScrappingResult sourceScrappingResult);
 }

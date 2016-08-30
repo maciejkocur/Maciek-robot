@@ -2,9 +2,10 @@ package io.github.bookcrawler.core;
 
 import io.github.bookcrawler.entities.BookInfo;
 
-import java.util.Collection;
+import java.util.List;
 
+@FunctionalInterface
 public interface BookExtractor {
 
-    Collection<BookInfo> extract();
+    List<BookInfo> extract();
 }
