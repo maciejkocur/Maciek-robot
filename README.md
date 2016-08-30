@@ -21,4 +21,5 @@ Next in your web browser type: `http://localhost:8080/`
 ## Perks
 
 20 points - asking about priorities
-
+50 points - first demo impressions
+30 points - changing project name to more identifiable
