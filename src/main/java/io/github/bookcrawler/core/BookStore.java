@@ -4,6 +4,9 @@ import io.github.bookcrawler.core.impl.JsoupSourceScrapper;
 import io.github.bookcrawler.core.impl.empik.EmpikBookInfoParser;
 import io.github.bookcrawler.core.impl.empik.EmpikBookLinksCrawler;
 import io.github.bookcrawler.core.impl.empik.EmpikBooksExtractor;
+import io.github.bookcrawler.core.impl.packtparser.PacktBookExtractor;
+import io.github.bookcrawler.core.impl.packtparser.PacktBookInfoParser;
+import io.github.bookcrawler.core.impl.packtparser.PacktBooksCrawler;
 
 public enum BookStore {
 
@@ -31,6 +34,32 @@ public enum BookStore {
         @Override
         public BookInfoParser parser() {
             return new EmpikBookInfoParser();
+        }
+    },
+    PACKT {
+        @Override
+        public String startUrl() {
+            return "https://www.packtpub.com/packt/offers/free-learning/";
+        }
+
+        @Override
+        public String domainUrl() {
+            return "https://www.packtpub.com";
+        }
+
+        @Override
+        public BookExtractor extractor() {
+            return new PacktBookExtractor(new JsoupSourceScrapper());
+        }
+
+        @Override
+        public BooksLinkCrawler crawler() {
+            return new PacktBooksCrawler();
+        }
+
+        @Override
+        public BookInfoParser parser() {
+            return new PacktBookInfoParser();
         }
     };
 
