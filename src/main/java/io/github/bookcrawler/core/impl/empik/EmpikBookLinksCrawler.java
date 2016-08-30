@@ -23,11 +23,12 @@ public class EmpikBookLinksCrawler implements BooksLinkCrawler {
             return Collections.emptyList();
         }
 
-        return getSectionElements(sourceScrappingResult.getSource()).parallelStream()
+        return getSectionElements(sourceScrappingResult.getSource())
+                .stream()
                 .map(e -> sourceScrapper.scrap(getLink(href(e))))
                 .filter(SourceScrappingResult::isSuccessful)
                 .map(SourceScrappingResult::getSource)
-                .flatMap(e -> getBookElements(e).parallelStream())
+                .flatMap(e -> getBookElements(e).stream())
                 .filter(e -> !href(e).isEmpty())
                 .map(e -> getLink(href(e)))
                 .collect(Collectors.toList());

@@ -20,10 +20,11 @@ public class EmpikBooksExtractor implements BookExtractor {
 
     @Override
     public List<BookInfo> extract() {
-        return EMPIK.crawler().crawl(EMPIK.startUrl(), sourceScrapper).parallelStream()
-                .map(url -> sourceScrapper.scrap(url))
+        return EMPIK.crawler().crawl(EMPIK.startUrl(), sourceScrapper)
+                .parallelStream()
+                .map(sourceScrapper::scrap)
                 .filter(SourceScrappingResult::isSuccessful)
-                .map(sourceScrappingResult -> EMPIK.parser().parse(sourceScrappingResult))
+                .map(EMPIK.parser()::parse)
                 .collect(Collectors.toList());
     }
 }
