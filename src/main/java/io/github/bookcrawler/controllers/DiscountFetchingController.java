@@ -19,8 +19,9 @@ public class DiscountFetchingController {
         List<BookInfo> list = new ArrayList<>();
 
         Collection<BookInfo> bookInfos = new DiscountFetchingService().getAllBooks();
-
+        
         bookInfos.stream().forEach(list::add);
+
         model.addAttribute("books", list);
 
         return "index";
