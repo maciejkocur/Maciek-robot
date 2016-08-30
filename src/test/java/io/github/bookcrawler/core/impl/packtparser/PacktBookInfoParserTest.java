@@ -32,8 +32,6 @@ public class PacktBookInfoParserTest {
                 "From beginners to intermediates, this practical guide covers all the bases " +
                 "to help you get the most out of your infrastructure and using the full potential of Cassandra.";
         String expectedPrice = "free";
-        String expectedUrl = "/home/damian/booksCrawler/robot/src/test/java/io/github/bookcrawler/core/" +
-                "impl/packtparser/mastering_casandra_packt.html";
         String expectedLibrary = "Packt";
         when(sourceScrappingResult.isSuccessful()).thenReturn(true);
         when(sourceScrappingResult.getSource()).thenReturn(source);
@@ -44,7 +42,6 @@ public class PacktBookInfoParserTest {
         assertThat(book.getAuthor(), is(expectedAuthor));
         assertThat(book.getDescription(), is(expectedDescription));
         assertThat(book.getPrice(), is(expectedPrice));
-        assertThat(book.getUrl(), is(expectedUrl));
         assertThat(book.getLibrary(), is(expectedLibrary));
     }
 }
