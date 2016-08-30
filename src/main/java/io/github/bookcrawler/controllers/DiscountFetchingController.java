@@ -16,7 +16,6 @@ public class DiscountFetchingController {
     public String hello(Model model) throws IOException {
         List<BookInfo> bookInfos = new DiscountFetchingService().getAllBooks();
         model.addAttribute("books", bookInfos);
-
         return "index";
     }
 }
