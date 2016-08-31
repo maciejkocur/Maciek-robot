@@ -23,14 +23,14 @@
         <org.hibernate>5.1.1.Final</org.hibernate>
         <postgresql>9.1-901-1.jdbc4</postgresql>
         <testng.version>6.9.10</testng.version>
-        <mockito.version>2.0.2-beta</mockito.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <testng.version>6.9.10</testng.version>
         <hamcrest-library.version>1.3</hamcrest-library.version>
-        <mockito-all.version>2.0.2-beta</mockito-all.version>
         <spring-test.version>4.3.2.RELEASE</spring-test.version>
         <assertj-core.version>3.5.2</assertj-core.version>
         <hsqldb-version>2.3.4</hsqldb-version>
+        <mockito.version>1.9.5</mockito.version>
+        <spring-sequrity-taglibs.version>4.1.3.RELEASE</spring-sequrity-taglibs.version>
     </properties>
 
     <dependencies>
@@ -42,9 +42,8 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-taglibs</artifactId>
-            <version>4.1.3.RELEASE</version>
+            <version>${spring-sequrity-taglibs.version}</version>
         </dependency>
-
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
@@ -121,6 +120,12 @@
             <artifactId>assertj-core</artifactId>
             <version>${assertj-core.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>${mockito.version}</version>
+        </dependency>
+
     </dependencies>
     <build>
         <finalName>Maciek-robot</finalName>

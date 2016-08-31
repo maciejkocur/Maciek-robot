@@ -2,54 +2,34 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-
     <title>Registration</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom styles for this template -->
-    <link href="css/justified-nav.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="/resources/css/localStyle.css" rel="stylesheet">
     <script type="text/javascript" language="javascript" src="mywebapp/mywebapp.nocache.js"></script>
 </head>
 <body>
 <div class="container">
-    <form action="registration" method="post" role="form">
-
-        <div class="row">
-            <div class="form-group col-lg-6">
-                <label>Full name</label>
-                <input type="text" name="name" class="form-control">
-            </div>
+    <p>
+    <form>
+        <h3>Register your Account</h3>
+        <div class="form-group">
+            <label for="name">Name and Surname</label>
+            <input type="name" class="form-control" id="name" placeholder="name and surname">
         </div>
-
-        <div class="row">
-            <div class="form-group col-lg-6">
-                <label>Login</label>
-                <input type="text" name="login" class="form-control">
-            </div>
+        <div class="form-group">
+            <label for="login">Login</label>
+            <input type="email" class="form-control" id="login" placeholder="login">
         </div>
-
-        <div class="row">
-            <div class="form-group col-lg-6">
-                <label>Password</label>
-                <input type="password" name="password" class="form-control">
-            </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" placeholder="Password">
         </div>
-
-        <button type="submit" class="btn btn-primary">Register</button>
+        <button type="button" class="btn btn-success">Submit</button>
     </form>
-
-    <!-- Site footer -->
-    <footer class="footer">
-        <p>&copy; 2016 Olga Ermolaeva</p>
-    </footer>
+    </p>
 </div>
 </body>
 </html>
