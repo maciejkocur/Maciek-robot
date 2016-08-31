@@ -15,8 +15,11 @@ public class PacktBooksCrawler implements BooksLinkCrawler {
     @Override
     public List<String> crawl(String url, SourceScrapper sourceScrapper) {
         SourceScrappingResult sourceScrappingResult = sourceScrapper.scrap(url);
-        Document document = sourceScrappingResult.getSource();
-        String bookLink = document.getElementsByClass(BOOK_LINK_CLASS_NAME).select("a").first().attr("abs:href");
-        return Collections.singletonList(bookLink);
+        if (sourceScrappingResult.isSuccessful()) {
+            Document document = sourceScrappingResult.getSource();
+            String bookLink = document.getElementsByClass(BOOK_LINK_CLASS_NAME).select("a").first().attr("abs:href");
+            return Collections.singletonList(bookLink);
+        }
+        return Collections.emptyList();
     }
 }
