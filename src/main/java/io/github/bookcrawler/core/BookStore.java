@@ -9,6 +9,9 @@ import io.github.bookcrawler.core.impl.helionparser.HelionBookParser;
 import io.github.bookcrawler.core.impl.packtparser.PacktBookExtractor;
 import io.github.bookcrawler.core.impl.packtparser.PacktBookInfoParser;
 import io.github.bookcrawler.core.impl.packtparser.PacktBooksCrawler;
+import io.github.bookcrawler.core.impl.publio.PublioBookInfoParser;
+import io.github.bookcrawler.core.impl.publio.PublioBookLinksCrawler;
+import io.github.bookcrawler.core.impl.publio.PublioBooksExtractor;
 
 public enum BookStore {
 
@@ -38,6 +41,7 @@ public enum BookStore {
             return new EmpikBookInfoParser();
         }
     },
+
     PACKT {
         @Override
         public String startUrl() {
@@ -89,6 +93,33 @@ public enum BookStore {
         @Override
         public BookInfoParser parser() {
             return new HelionBookParser();
+        }
+    },
+    PUBLIO {
+        @Override
+        public String startUrl() {
+            return "http://www.publio.pl/szukaj,promocja.html?sections=EBOOK";
+        }
+
+        @Override
+        public String domainUrl() {
+            return "http://www.publio.pl";
+        }
+
+        @Override
+        public BookExtractor extractor() {
+            return new PublioBooksExtractor(new JsoupSourceScrapper());
+        }
+
+        @Override
+        public BooksLinkCrawler crawler() {
+
+            return new PublioBookLinksCrawler();
+        }
+
+        @Override
+        public BookInfoParser parser() {
+            return new PublioBookInfoParser();
         }
     };
 
