@@ -1,61 +1,46 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="ISO-8859-1" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
- <!DOCTYPE html>
- <html>
- <head>
-   <meta charset="UTF-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-8">
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-8">
     <title>Robot</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-    <script type="text/javascript">
-      $(document).ready(function() {
-      $('dropdown-toggle').dropdown()
-        });
-    </script>
- </head>
-
- <body>
-    <nav class="navbar navbar-default" role="navigation">
-        <div class="container-fluid">
-     <!-- Brand and toggle get grouped for better mobile display -->
-     <div class="navbar-header">
-       <button type="button" class="navbar-toggle" data-toggle="collapse" data-    target="#bs-example-navbar-collapse-1">
-     <span class="sr-only">Toggle navigation</span>
-     <span class="icon-bar"></span>
-     <span class="icon-bar"></span>
-     <span class="icon-bar"></span>
-   </button>
- </div>
-
- <!-- Collect the nav links, forms, and other content for toggling -->
- <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-   <ul class="nav navbar-nav">
-     <li class="dropdown">
-       <a class="dropdown-toggle" data-toggle="dropdown">Library to search books<b class="caret"></b></a>
-       <ul class="dropdown-menu" role="menu">
-         <li><a href="../fetch/Empik">Empik</a></li>
-         <li><a href="../fetch/Empik">Another site</a></li>
-         <li><a href="#">Yet another site</a></li>
-         <li class="divider"></li>
-         <li><a href="#">Most popular site</a></li>
-       </ul>
-     </li>
-   </ul>
-   <ul class="nav navbar-nav navbar-right">
-     <form action="login" method="post" class="navbar-form navbar-right">
-        <div class="form-group">
-          <input type="text" name="login" placeholder="login" class="form-control">
+</head>
+<body>
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">Library to search books<b class="caret"></b></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="../fetch/Empik">Empik</a></li>
+                        <li><a href="../fetch/Empik">Another site</a></li>
+                        <li><a href="#">Yet another site</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Most popular site</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <form action="login" method="post" class="navbar-form navbar-right">
+                    <div class="form-group">
+                        <input type="text" name="login" placeholder="login" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="password" placeholder="Password" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-success">Sign in</button>
+                    <a href="../../registration.html" class="btn btn-success">Sign up</a>
+                </form>
+            </ul>
         </div>
-        <div class="form-group">
-          <input type="password" name="password" placeholder="Password" class="form-control">
-        </div>
-          <button type="submit" class="btn btn-success">Sign in</button>
-          <a href="../../registration.html" class="btn btn-success">Sign up</a>
-     </form>
-   </ul>
- </div><!-- /.navbar-collapse -->
-   </body>
- </html>
+    </div>
+</body>
+</html>

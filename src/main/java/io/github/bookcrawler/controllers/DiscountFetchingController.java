@@ -1,6 +1,7 @@
 package io.github.bookcrawler.controllers;
 
-import io.github.bookcrawler.core.DiscountFetchingService;
+
+import io.github.bookcrawler.cache.DatabaseCache;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +14,7 @@ import java.io.IOException;
 public class DiscountFetchingController {
 
     @Autowired
-    DiscountFetchingService discountFetchingService;
+    DatabaseCache databaseCacheForAllUsers;
 
     @GetMapping("/")
     public String hello() throws IOException {
@@ -22,7 +23,7 @@ public class DiscountFetchingController {
 
     @GetMapping("/fetch/{library}")
     public String fetchBooks(@PathVariable String library, Model model) throws IOException {
-        model.addAttribute("books", discountFetchingService.getAllBooks());
+        model.addAttribute("books", databaseCacheForAllUsers.getAllBooksInfo());
         return "booksResult";
     }
 }
