@@ -18,10 +18,13 @@ import java.util.Properties;
 
 import static io.github.bookcrawler.utilities.DatabaseConfigurationConstants.*;
 
-@Configuration
-@EnableTransactionManagement
-@EnableJpaRepositories(REPOSITORIES_PACKAGE)
-@PropertySource(CLASSPATH_TO_RESOURCES)
+
+//TODO it will be used in the future, commented out, because it was slowing down our application
+//during first run
+//@Configuration
+//@EnableTransactionManagement
+//@EnableJpaRepositories(REPOSITORIES_PACKAGE)
+//@PropertySource(CLASSPATH_TO_RESOURCES)
 public class DatabaseConfiguration {
 
     @Autowired
