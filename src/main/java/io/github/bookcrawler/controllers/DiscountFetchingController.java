@@ -23,6 +23,7 @@ public class DiscountFetchingController {
         List<BookStore> bookStores = new ArrayList<>();
         bookStores.add(BookStore.EMPIK);
         bookStores.add(BookStore.PACKT);
+        bookStores.add(BookStore.HELION);
         Collection<BookInfo> bookInfos = new DiscountFetchingService().fetch(bookStores);
 
         StreamSupport.stream(bookInfos.spliterator(),false).forEach(list::add);

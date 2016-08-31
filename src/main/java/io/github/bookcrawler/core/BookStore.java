@@ -4,6 +4,8 @@ import io.github.bookcrawler.core.impl.JsoupSourceScrapper;
 import io.github.bookcrawler.core.impl.empik.EmpikBookInfoParser;
 import io.github.bookcrawler.core.impl.empik.EmpikBookLinksCrawler;
 import io.github.bookcrawler.core.impl.empik.EmpikBooksExtractor;
+import io.github.bookcrawler.core.impl.helionparser.HelionBookExtractor;
+import io.github.bookcrawler.core.impl.helionparser.HelionBookParser;
 import io.github.bookcrawler.core.impl.packtparser.PacktBookExtractor;
 import io.github.bookcrawler.core.impl.packtparser.PacktBookInfoParser;
 import io.github.bookcrawler.core.impl.packtparser.PacktBooksCrawler;
@@ -60,6 +62,33 @@ public enum BookStore {
         @Override
         public BookInfoParser parser() {
             return new PacktBookInfoParser();
+        }
+    },
+    HELION {
+        @Override
+        public String startUrl() {
+            return "http://helion.pl/promocja-dnia";
+        }
+
+        @Override
+        public String domainUrl() {
+            return "http://helion.pl";
+        }
+
+        @Override
+        public BookExtractor extractor() {
+            return new HelionBookExtractor(new JsoupSourceScrapper());
+        }
+
+        @Override
+        public BooksLinkCrawler crawler() {
+            //empty, not used
+            return null;
+        }
+
+        @Override
+        public BookInfoParser parser() {
+            return new HelionBookParser();
         }
     };
 
