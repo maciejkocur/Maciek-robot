@@ -27,7 +27,7 @@ public class PublioBookLinksCrawler implements BooksLinkCrawler {
         Integer pages = getPageQuantity(sourceScrappingResult);
         List<String> urls = new ArrayList<>();
 
-        for (int i = 1; i < pages; i++) {
+        for (int i = 0; i < pages; i++) {
             urls.addAll(getBookElements(sourceScrappingResult.getSource())
                     .parallelStream()
                     .map(e -> getLink(href(e)))
