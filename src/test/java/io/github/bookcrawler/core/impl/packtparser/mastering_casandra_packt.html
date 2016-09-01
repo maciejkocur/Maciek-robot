@@ -1,0 +1,1972 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+	<head>
+		<title>Mastering Apache Cassandra | PACKT Books</title>
+		<script>
+			dataLayer = [];
+		</script>
+		<script type="text/javascript">
+			var GRANIFY_SITE_ID = 1318;(function(e,t,n){var r,i,s,o,u;u=false;try{o=new RegExp("(?:^|\\W)_gr_test_url=([^;]*)");s=document.cookie.match(o);if(s){if(s[1]==="1")u=true}else{r=Math.random();if(r>.95)u=true;i=new Date(+(new Date)+1e3*60*60*24*2);document.cookie="_gr_test_url="+ +u+";expires="+i.toGMTString()+";path=/"}}catch(a){}if(u)e.replace("javascript.js","javascript.next.js");try{o=new RegExp("(?:^|\\W)_gr_ep=([^;]*)");s=document.cookie.match(o);if(!s){document.cookie="_gr_ep_sent=;expires=Thu, 01-Jan-1970 00:00:01 GMT;path=/";document.cookie="_gr_er_sent=;expires=Thu, 01-Jan-1970 00:00:01 GMT;path=/";if(!window.location.origin){if(window.location.port)port=":"+window.location.port;else port="";window.location.origin=window.location.protocol+"//"+window.location.hostname+port}path=window.location.toString().replace(window.location.origin,"");referrer=document.referrer;i=new Date(+(new Date)+1e3*60*30);document.cookie="_gr_ep="+path+";expires="+i.toGMTString()+";path=/";document.cookie="_gr_er="+referrer+";expires="+i.toGMTString()+";path=/"}}catch(a){}a=new Date;a=""+a.getUTCFullYear()+(a.getUTCMonth()+1)+a.getUTCDate();e=e+"?id="+t+"&v="+a;window.Granify=n;n._stack=[];n.init=function(e,t,r){function i(e,t){e[t]=function(){Granify._stack.push([t].concat(Array.prototype.slice.call(arguments,0)))}}var s=n;h=["on","identify","addTag","trackPageView","trackCart","trackOrder"];for(a=0;a<h.length;a++)i(s,h[a])};n.init();var f,l,c,p=document.createElement("iframe");p.src="javascript:false";p.title="";p.role="presentation";(p.frameElement||p).style.cssText="width: 0 !important; height: 0 !important; border: 0 !important; overflow: hidden !important; position: absolute !important; top: -1000px !important; left: -1000px !important;";c=document.getElementsByTagName("script");c=c[c.length-1];c.parentNode.insertBefore(p,c);try{l=p.contentWindow.document}catch(a){f=document.domain;p.src="javascript:var d=document.open();d.domain='"+f+"';void(0);";l=p.contentWindow.document}l.open()._l=function(){var t=this.createElement("script");if(f)this.domain=f;t.id="js-iframe-async";t.src=e;this.body.appendChild(t)};l.write('<body onload="document._l();">');l.close()})("//cdn.granify.com/assets/javascript.js",GRANIFY_SITE_ID,[])
+		</script>
+
+				<script type="text/javascript">
+			Granify.trackPageView({
+			  page_type: "product"
+			});
+		</script>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" href="//d1ldz4te4covpm.cloudfront.net/misc/favicon.ico" type="image/x-icon" />
+<meta name="description" content="Learn how to build more robust, scalable databases using Cassandra. From beginners to intermediates, this practical guide covers all the bases to help you get the most out of your infrastructure and using the full potential of Cassandra." />
+<meta name="revisit-after" content="1 day" />
+		<link rel="canonical" href="https://www.packtpub.com/big-data-and-business-intelligence/mastering-apache-cassandra" />
+		
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:site" content="@packtpub" />
+        <meta name="twitter:title" content="Mastering Apache Cassandra | PACKT Books" />
+        <meta name="twitter:description" content="" />
+                
+                <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta id="viewport" name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+        <!-- <link href="//fonts.googleapis.com/css?family=Ubuntu:300,400,500,700,300italic,400italic,500italic,700italic" rel="stylesheet" type="text/css">-->
+         <link href="/sites/all/themes/packt_v4/fonts/ubuntu.css" rel="stylesheet" type="text/css">
+        <!--[if lt IE 10]>
+        <link href="/sites/all/themes/packt_v4/css/core/packtpub_ie.css" rel="stylesheet" type="text/css">
+        <![endif]-->
+        <link type="text/css" rel="stylesheet" media="all" href="/sites/default/files/css/1468931374c8a4d36f/88193022b61633465ae9b864eeae61e3.css" />
+<link type="text/css" rel="stylesheet" media="print" href="/sites/default/files/css/1468931374c8a4d36f/6e295a6eb8f64cef4e07d9b1f02d46e8.css" />
+  
+        <script type="text/javascript" src="/sites/default/files/js/14689313744e5020df/a3788c8c64fd65c470e23e7534c3ebc8.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+jQuery.extend(Drupal.settings, { "basePath": "\u002F", "dhtmlMenu": [ "doubleclick", "clone" ] });
+//--><!]]>
+</script>
+        <script type="text/javascript">
+            var Packt = Packt || {}; Packt.user = {"cart":[],"newsletters":[],"country_code":"PL","selected_currency":"EUR","currency":"EUR","currency_symbol":"\u20ac","uid":0};
+        </script>
+        <link rel="alternate" type="application/rss+xml" href="/rss.xml" title="Packt Publishing News" >
+        <script>
+            (function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,"script","//www.google-analytics.com/analytics.js","ga");
+            ga("create", "UA-284627-1", "packtpub.com", {"siteSpeedSampleRate": 100});
+            ga("require", "displayfeatures");
+            ga('require', 'ec');
+            ga("send", "pageview");
+        </script>
+    </head>
+    
+    <body id="ppv4" class="with-logo">
+        <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-NJWZFW"
+            height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+            <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-NJWZFW');Packt.dataLayer.init();</script>
+
+        <div id="page" class="" checkout="">
+            <div id="page-header">
+                			<div id="account-bar" class="cf">
+				<div class="section-inner">
+					<div id="account-bar-status" class="cf">
+						<div id="account-bar-currency-selector">
+							<form accept-charset="UTF-8" method="post" id="packt-currency-select-form" class="float-left">
+								<div class="form-item" id="edit-currency-wrapper">
+									<select name="currency" class="form-select packt-currency-select-box selectBox" id="edit-currency" style="display:none">
+										<option value="GBP" >GBP &#163;</option>
+										<option value="USD" >US &#36;</option>
+										<option value="EUR" >EUR &#8364;</option>
+										<option value="AUD" >AU &#36;</option>
+									</select>
+								</div>
+								<input type="submit" name="op" value="" style="display: none;" class="form-submit">			
+								<input type="hidden" name="form_id" id="edit-packt-currency-select" value="packt_currency_select_form">
+							</form>
+						</div>				
+						<div class="account-bar-divider float-left">|</div>		
+						<div id="account-bar-status-security"></div>
+						<noscript>
+							<div id="account-bar-login-register-ns">
+								<a href="/account">My Account</a>
+							</div>
+						</noscript>
+						<div id="account-bar-login-register">
+							<a href="#" class="login-popup"><div class="float-left">Log in</div></a>
+							<div class="account-bar-divider float-left">|</div>	
+							<a href="/register"><div class="float-left">Register</div></a>
+						</div>
+						
+						<div id="account-bar-logged-in">
+							<a href="/account">
+								<div class="float-left"><strong>My Account</strong></div>
+							</a>
+							<div class="account-bar-divider float-left">|</div>	
+							<a href="/logout"><div class="float-left">Sign out</div></a>
+						</div>
+					</div>
+					<div id="account-bar-form">
+						<div id="account-bar-form-login" class="cf">
+							<div class="account-bar-form-left">
+								<h4>Log in to your account</h4>
+								<form  accept-charset="UTF-8" method="post" id="packt-user-login-form">
+<div><div id="login-form" class="cf">
+	<div id="login-form-email">
+		<div class="form-item" id="email-wrapper">
+ <input type="text" maxlength="128" name="email" id="email" size="24" value="" placeholder="E-mail address" class="form-text required" />
+</div>
+	</div>
+	<div id="login-form-pass">
+		<div class="form-item" id="password-wrapper">
+ <input type="password" name="password" id="password"  maxlength="128"  size="24"  placeholder="Password" class="form-text required" />
+</div>
+	</div>
+	<div id="login-form-submit">
+		<input type="submit" name="op" id="edit-submit-1" value="Login"  class=" form-submit" />
+	</div>
+	<br />
+</div>
+<a href="https://www.packtpub.com/account/password">Forgotten your password?</a>
+
+
+
+<input type="hidden" name="form_build_id" id="form-6781b507c1cf1e87f9cd42f0baaf3d69" value="form-6781b507c1cf1e87f9cd42f0baaf3d69"  />
+
+<input type="hidden" name="form_id" id="edit-packt-user-login-form" value="packt_user_login_form"  />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div></form>
+							</div>
+							<div class="account-bar-form-right">
+								<h4>Not yet a member?</h4>
+								<p>Register for an account and access leading-edge content on emerging technologies.</p>
+								<p><a class="account-bar-toggle register" href="/register">Register now</a></p>
+							</div>
+						</div>						
+						<div id="account-bar-form-close"><a href="#">Close</a></div>
+					</div>
+				</div>
+			</div>
+                						<div id="menu-bar">
+				<div class="section-inner cf">
+					<div id="menuIcon"></div>
+					<div id="menu-links" class="">
+						<a href="/">
+							<div class="menu-item-tab">
+								<div class="menu-item-text dummy" id="menu-packt-logo">
+									<span class="alt">Packt Logo</span>
+								</div>
+							</div>
+						</a>
+													<a href="/all">
+								<div class="menu-item-tab">
+									<div class="menu-item-text" id="menu-books">
+										<span class="menu-text">Books & Videos</span>
+									</div>
+								</div>
+							</a>
+							<a href="/tech">
+								<div class="menu-item-tab">
+									<div class="menu-item-text" id="menu-tech">
+										<span class="menu-text">Tech</span>
+									</div>
+								</div>
+							</a>
+							<a href="/books/info/packt/about">						
+								<div class="menu-item-tab">
+									<div class="menu-item-text" id="menu-packt">
+										<span class="menu-text">Packt</span>
+									</div>
+								</div>
+							</a>
+							<a href="/books/content/support">						
+								<div class="menu-item-tab">
+									<div class="menu-item-text" id="menu-support">
+										<span class="menu-text">Support</span>
+									</div>
+								</div>
+							</a>
+
+                            <a id='menu-packtlib-href' href="/mapt">
+                                <div class="menu-item-tab menu-item-tab pl-tab">
+                                    <div class="menu-item-text" id="menu-packtlib">
+                                        <span class="menu-text pl">
+                                            <img id="pl-img" src="//d255esdrn735hr.cloudfront.net/sites/all/themes/packt_v4/images/mapt-pplogo.png" />
+                                        </span>
+
+                                        <span class="menu-text mob-pl">
+                                            <img id="pl-img" src="//dz13w8afd47il.cloudfront.net/sites/all/themes/packt_v4/images/mapt-pplogo-white.png" />
+                                        </span>
+                                    </div>
+                                </div>
+                            </a>
+											</div>
+					<div id="menu-icons" class="">
+													<a href="#">
+								<div class="menu-item-tab">
+									<div class="menu-item-icon" id="menu-search">
+										<span class="alt">Search</span>
+									</div>
+								</div>
+							</a>
+							<a href="/collection">
+								<div class="menu-item-tab">
+									<div class="menu-item-icon dummy" id="menu-collection">
+										<span class="alt">My Collection</span>
+									</div>
+								</div>
+							</a>
+												<a href="https://www.packtpub.com/cart/checkout">
+							<div class="menu-item-tab last">
+								<div class="menu-item-icon" id="menu-cart">
+									<div id="cart-icon-count" class="cart-icon-count"></div>
+									<span class="alt">Cart</span>
+								</div>
+							</div>
+						</a>
+					</div>
+				</div>
+			</div>
+			
+			<div id="menu-bar-popup" class="cf">	
+				<div id="menu-bar-popup-inner" class="cf"></div>	
+				<div class="section-inner cf">	
+
+											<div class="menu-bar-popup-menu threecol cf" id="menu-books-popup">
+							<div class="menu-bar-popup-section-left threecol">
+								<div class="menu-bar-popup-section-left-inner cf">
+									<p class="menu-bar-popup-title">Book & Video Categories</p>
+									<div id="books-menu">
+										<div class="cf">
+                                            <div class='books-menu-column categories'><div class='inner'><p><a href="/web-development">Web Development</a></p><p><a href="/big-data-and-business-intelligence">Big Data & Business Intelligence</a></p><p><a href="/application-development">Application Development</a></p><p><a href="/virtualization-and-cloud">Virtualization & Cloud</a></p></div></div><div class='books-menu-column categories'><div class='inner'><p><a href="/game-development">Game Development</a></p><p><a href="/networking-and-servers">Networking & Servers</a></p><p><a href="/hardware-and-creative">Hardware & Creative</a></p><p><a href="/business">Business</a></p></div></div>                                            <div class='books-menu-column last categories'>
+                                                <div class='inner'>
+                                                <p><a href="/all">All Products</a></p><p><a href="/all-books">All Books</a></p><p><a href="/video">All Videos</a></p><p><a href="/latest-releases">Latest Releases</a></p>                                                </div>
+                                            </div>
+										</div>
+								</div>
+							</div>
+						</div>
+						<div class="menu-bar-popup-section-right threecol">
+															<div class="menu-bar-popup-section-right-inner cf">
+									<div id="deal-of-the-day-banner" class="cf">
+										<div id="menu-bar-dotd-preview-thumb">
+											<a href="/books/deal-of-the-day">
+												<img src="//dz13w8afd47il.cloudfront.net/sites/default/files/imagecache/featured_book_block/B05678_MockupCover_Normal_.jpg" alt="Developing with Docker" title="" width="150" height="185" class="lazyload-disabled imagecache imagecache-featured_book_block"/>												<div class="menu-bar-dotd-percentage">
+													<div class="menu-bar-dotd-percentage-text">
+														50<sup class="dotd-sup">%</sup><div class="dotd-sub">off</div>
+													</div>
+												</div>
+											</a>
+										</div>
+										<div id="menu-bar-dotd-preview-text">
+											<p class="menu-bar-popup-title"><a href="/books/deal-of-the-day">Deal of the Day</a></p>
+											<p>A fast-paced guide to change the way your organization deploys software at scale</p>
+											
+																																		</div>
+											<div class="cf deal-of-the-day-in-header">
+												<div class="dots-main-book-price float-left">
+													<div class="book-top-pricing-main-price">
+														<div class="book-top-pricing-main-ebook-price  ">€17.83</div>
+													</div>
+                                                    <div class="dotd-rrp-price">
+                                                        RRP €35.65                                                    </div>
+												</div>
+
+												<form action="/add_to_cart/25809"  accept-charset="UTF-8" method="post" id="packt-libraries-add-to-cart-form" class="packt-libraries-add-to-cart-form">
+<div>
+<div class="book-top-addtocart-inner">	
+	<div class="book-top-addtocart-logo"></div>
+	<div class="book-top-addtocart-separator"></div>
+	
+	<input type="submit" name="submit-25809" id="submit-25809" value="Add to Cart"  class=" form-submit" />
+	<input type="hidden" name="nids" id="nids" value="25809"  />
+
+<input type="hidden" name="qtys" id="qtys" value="1"  />
+
+<input type="hidden" name="upsell" id="edit-upsell" value="1"  />
+
+
+
+
+
+
+<input type="hidden" name="form_build_id" id="form-043d67e95ac36282aa3d26d0c2a2e8e1" value="form-043d67e95ac36282aa3d26d0c2a2e8e1"  />
+
+<input type="hidden" name="form_id" id="edit-packt-libraries-add-to-cart-form" value="packt_libraries_add_to_cart_form"  />
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+</div></form>
+											</div>
+										</div>
+										<div class="cf newsletter-signup-form" newsletter_id=280>
+											<div class="dotd-signup-text"><strong>Sign up here to get these deals straight to your inbox</strong></div> 
+											<form  accept-charset="UTF-8" method="post" id="packt-v3-subscribtion-dotd-form">
+<div><div class="form-item">
+ 
+</div>
+<div class="form-item" id="edit-mail-wrapper">
+ <input type="text" maxlength="128" name="mail" id="edit-mail" size="60" value="" placeholder="Enter your email address" class="form-text" />
+</div>
+<input type="hidden" name="newsletter_id" id="edit-newsletter-id" value=""  />
+<input type="submit" name="op" id="edit-submit-3" value="Submit"  class=" form-submit" />
+<input type="hidden" name="form_build_id" id="form-57772f13fc9359900452284822166cbf" value="form-57772f13fc9359900452284822166cbf"  />
+<input type="hidden" name="form_id" id="edit-packt-v3-subscribtion-dotd-form" value="packt_v3_subscribtion_dotd_form"  />
+
+</div></form>
+										</div>
+									</div>
+															</div>
+						</div>
+
+						<div class="menu-bar-popup-menu fourcol cf" id="menu-tech-popup">
+							<div class="menu-bar-popup-section-left fourcol">
+								<div class="menu-bar-popup-section-left-inner cf">
+									<p class="menu-bar-popup-title">Tech</p>
+									<div class="packt-menu cf">	
+										<div class="cf">
+											<div class='books-menu-column categories '><div class='inner'>													<p><a href="/tech/android">Android</a></p>
+
+																									<p><a href="/tech/angularjs">AngularJS</a></p>
+
+																									<p><a href="/tech/arduino">Arduino</a></p>
+
+																									<p><a href="/tech/blender">Blender</a></p>
+
+																									<p><a href="/tech/bootstrap">Bootstrap</a></p>
+
+																									<p><a href="/tech/data%20analysis">Data Analysis</a></p>
+
+																									<p><a href="/tech/django">Django</a></p>
+
+																									<p><a href="/tech/docker">Docker</a></p>
+
+																									<p><a href="/tech/drupal">Drupal</a></p>
+
+												</div></div><div class='books-menu-column categories '><div class='inner'>													<p><a href="/tech/graphics%20programming">Graphics Programming</a></p>
+
+																									<p><a href="/tech/hadoop">Hadoop</a></p>
+
+																									<p><a href="/tech/Internet%20of%20Things">Internet of Things</a></p>
+
+																									<p><a href="/tech/ios">iOS</a></p>
+
+																									<p><a href="/tech/java">Java</a></p>
+
+																									<p><a href="/tech/javascript">JavaScript</a></p>
+
+																									<p><a href="/tech/jquery">jQuery</a></p>
+
+																									<p><a href="/tech/linux">Linux</a></p>
+
+												</div></div><div class='books-menu-column categories '><div class='inner'>													<p><a href="/tech/machine%20learning">Machine Learning</a></p>
+
+																									<p><a href="/tech/opencv">OpenCV</a></p>
+
+																									<p><a href="/tech/openstack">OpenStack</a></p>
+
+																									<p><a href="/tech/oracle">Oracle</a></p>
+
+																									<p><a href="/tech/penetration%20testing">Penetration Testing</a></p>
+
+																									<p><a href="/tech/php">PHP</a></p>
+
+																									<p><a href="/tech/postgresql">PostgreSQL</a></p>
+
+																									<p><a href="/tech/python">Python</a></p>
+
+												</div></div><div class='books-menu-column categories last'><div class='inner'>													<p><a href="/tech/qlikview">QlikView</a></p>
+
+																									<p><a href="/tech/r">R</a></p>
+
+																									<p><a href="/tech/scala">Scala</a></p>
+
+																									<p><a href="/tech/spark">Spark</a></p>
+
+																									<p><a href="/tech/spring">Spring</a></p>
+
+																									<p><a href="/tech/swift">Swift</a></p>
+
+																									<p><a href="/tech/unity">Unity</a></p>
+
+																									<p><a href="/tech/wordpress">WordPress</a></p>
+
+												</div></div>										</div>
+									</div>
+								</div>
+							</div>						
+						</div>
+
+						<div class="menu-bar-popup-menu cf" id="menu-packt-popup">
+							<div class="menu-bar-popup-section-left twocol">
+								<div class="menu-bar-popup-section-left-inner cf">
+									<p class="menu-bar-popup-title">Packt Publishing</p>
+									<div class="packt-menu cf">
+										<div class="books-menu-column">
+											<div class="inner">
+												<p><a href="/books/info/packt/about">About Us</a></p>
+												<p><a href="/books/info/packt/authors">Our Authors</a></p>
+												<p><a href="/books/info/packt/trade-partners">Trade & Partners</a></p>
+											<!--<p><a href="/blog-network">Blog</a></p>
+											<p><a href="/techprimer-network">Technology Primers</a></p>-->
+										</div>
+									</div>
+									<div class="books-menu-column">
+										<div class="inner">
+											<p><a href="/books/info/packt/contact-us">Contact Us</a></p>
+											<p><a href="/books/info/packt/careers-with-packt">Careers</a></p>
+											<!--<p><a href="/article-network">Articles</a></p>-->
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>						
+						<!--<div class="menu-bar-popup-section-right twocol">
+							<div class="menu-bar-popup-section-right-inner cf">
+								<div id="menu-bar-article-preview-thumb">
+									<noscript><img src="//dz13w8afd47il.cloudfront.net/sites/default/files/imagecache/ppv4_header_article_thumb/329_Cover Image.png" alt="Services with Reactive Observation" title="" width="240" height="114" class=" imagecache imagecache-ppv4_header_article_thumb"/></noscript><img src="/sites/default/files/blank.gif" alt="Services with Reactive Observation" title="" width="240" height="114" data-original="//dz13w8afd47il.cloudfront.net/sites/default/files/imagecache/ppv4_header_article_thumb/329_Cover Image.png" class=" imagecache imagecache-ppv4_header_article_thumb"/>								</div>
+								<div id="menu-bar-article-preview-text">
+									<p class="menu-bar-popup-title"><a href="/books/content/services-reactive-observation">Services with Reactive Observation</a></p>
+									<p id="menu-bar-article-one-liner"></p>
+									<p><a href="/articles">Read all our articles</a></p>
+								</div>
+							</div>
+						</div>-->
+					</div>
+
+
+					<div class="menu-bar-popup-menu cf" id="menu-support-popup">
+						<div class="menu-bar-popup-section-left twocol">
+							<div class="menu-bar-popup-section-left-inner cf">
+								<p class="menu-bar-popup-title">Support</p>
+								<div class="packt-menu cf">
+									<div class="books-menu-column">
+										<div class="inner">
+											<p><a href="/books/info/packt/faq">FAQs</a></p>
+											<p><a href="/books/info/packt/ordering">Ordering Information</a></p>
+											<p><a href="/books/info/packt/terms-and-conditions">Terms & Conditions</a></p>
+										</div>
+									</div>
+									<div class="books-menu-column">
+										<div class="inner">
+											<p><a href="/books/content/support">Code Downloads & Errata</a></p>
+											<p><a href="/books/content/errata">Submit Errata</a></p>
+										</div>
+									</div>
+								</div>
+							</div>							
+						</div>
+					</div>
+
+					<div class="menu-bar-popup-menu cf" id="menu-packtlib-popup">
+						<div class="menu-bar-popup-section-left twocol">
+							<div class="menu-bar-popup-section-left-inner cf">
+								<p class="menu-bar-popup-title">Mapt</p>
+								<div class="packt-menu cf">
+									<div class="books-menu-column">
+										<div class="inner">
+											<p><a href="/books/subscription/mapt">Subscribe</a></p>
+											<p><a href="/books/subscription/mapt-b2b">Mapt For Business</a></p>
+											<p><a href="/mapt">Take me to Mapt</a></p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="menu-bar-popup-menu cf" id="menu-search-popup">
+						<div class="menu-bar-popup-search-inner">
+							<form  accept-charset="UTF-8" method="post" id="packt-libraries-main-search-form">
+<div>
+<div id="menu-bar-search" class="cf">
+	<div id="menu-bar-search-title">
+		<div class="form-item">Search</div>
+	</div>
+	<div id="menu-bar-search-box">
+		<div class="form-item" id="main-search-keys-wrapper">
+ <input type="text" name="keys" id="main-search-keys" size="49" value="" placeholder="Enter your search terms..." class="form-text" />
+</div>
+	</div>
+	<div id="menu-bar-search-button">
+		<input type="submit" name="op" id="edit-submit-5" value="Search"  class=" form-submit" />
+	</div>
+	<input type="hidden" name="sort" id="edit-sort" value="0"  />
+
+<input type="hidden" name="types" id="edit-types" value="0"  />
+
+<input type="hidden" name="forthcoming" id="edit-forthcoming" value="1"  />
+
+<input type="hidden" name="available" id="edit-available" value="1"  />
+
+<input type="hidden" name="count" id="edit-count" value="20"  />
+
+
+
+
+<input type="hidden" name="form_build_id" id="form-3c8772c14e8f997f7e3867b9a614547e" value="form-3c8772c14e8f997f7e3867b9a614547e"  />
+
+<input type="hidden" name="form_id" id="edit-packt-libraries-main-search-form" value="packt_libraries_main_search_form"  />
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+</div>
+<div class="facet-search-cross facet-search-cross-autocomplete"></div>
+</div></form>
+						</div>
+					</div>
+					
+					<div class="menu-bar-popup-menu cf" id="menu-cart-popup">
+						<div class="menu-bar-popup-section-left even">
+							<div class="menu-bar-popup-section-left-inner cf">
+								<div id="menu-bar-popup-cart-preview">
+									<div id="menu-bar-popup-cart-item-preview">
+
+										<div id="menu-bar-popup-cart-item-preview-image">
+											<img src="" />
+										</div>
+										<p class="menu-bar-popup-title">Added to Cart</p>
+										<p id="menu-bar-popup-cart-item-preview-title"></p>
+										<p id="menu-bar-popup-cart-item-preview-oneliner"></p>
+										<p id="menu-bar-popup-cart-item-preview-additional">...and <span></span> more</p>
+										<p class="price"><span id="menu-bar-popup-cart-item-preview-currency"></span><span id="menu-bar-popup-cart-item-preview-price"></span></p>
+									</div>
+								</div>
+								<p id="menu-bar-popup-cart-empty-preview">
+									You don't have anything in your cart right now.
+								</p>
+							</div>
+						</div>
+						
+						<div class="menu-bar-popup-section-right even">
+							<div class="menu-bar-popup-section-right-inner cf">
+								<div id="menu-bar-popup-content">
+									<div class="cf">
+										<p id="menu-bar-popup-subtotal-title" class="menu-bar-popup-title float-left">Subtotal</p>
+										<p id="menu-bar-popup-subtotal-value" class="menu-bar-popup-title float-right price"> 0.00</p>
+										<p id="menu-bar-popup-subtotal-currency" class="menu-bar-popup-title float-right price"></p>
+									</div>
+									<p><strong>Free shipping</strong> on print orders for US, UK, Europe and selected Asian countries</p>
+									<form>
+										<a href="https://www.packtpub.com/cart/checkout" class="button-link grey">View Cart</a>
+										<span></span>
+										<a href="https://www.packtpub.com/cart/checkout/?checkout_step=payment" class="button-link">Check Out</a>
+									</form>
+								</div>
+								<div id="checkout-close" onclick="Packt.headerMenu.hideMenuPopup()"></div>
+								
+							</div>
+						</div>
+					</div>
+					<div class="menu-bar-popup-menu cf" id="menu-cart-small">
+						<div>
+							<div class="small-popup-outer float-right">
+								<div class="small-popup-tick">
+									&nbsp;
+								</div>
+								<div class="small-popup-text">
+									<strong>
+										Title added to cart
+									</strong>
+								</div>
+								<div class="small-popup-seperator">
+								</div>
+								<div class="small-popup-arrows">
+&nbsp;
+								</div>
+							</div>
+						</div>
+					</div>
+							</div>
+			<div id="menu-bar-popup-inner-bottom" class="cf"></div>
+		</div>
+            </div>
+						<div id="main-container" class="not-front not-logged-in page-node node-type-books no-sidebars page-big-data-and-business-intelligence-mastering-apache-cassandra section-big-data-and-business-intelligence node-full-view ">
+				<div id="main" class="">
+					
+											 <!-- #content -->
+					 	<div id="content">
+						 	
+					 		
+						 								 			<div class="section-inner cf">
+						 							 			<div id="messages-container">
+							 							 			</div>
+						 								 			</div>
+						 		
+
+							
+							
+							<a name="main-content" id="main-content"></a>
+							
+<div id="main-book" class="cf" itemscope itemtype="http://schema.org/Book">
+	<div class="book-top-block-wrapper cf">
+		
+<div class="book-top-block cf section-inner ">
+	<div id="mobile-book-info" class="onlyMobile">
+		<div class="book-top-block-info-title float-left">
+			<h1 itemprop="name">Mastering Apache Cassandra</h1>
+		</div>
+
+		<div class="book-top-block-info-one-liner cf">
+			Learn how to build more robust, scalable databases using Cassandra. From beginners to intermediates, this practical guide covers all the bases to help you get the most out of your infrastructure and using the full potential of Cassandra.		</div>
+
+        	</div>
+
+	<div id="mobile-book-container">
+
+		<div class="book-top-block-image left">
+			<div class="product-image">
+				<span itemprop="image" itemtype="http://schema.org/URL" itemscope>
+					<a class="fancybox" href="/sites/default/files/2681OS.jpg">
+						<img src="//dz13w8afd47il.cloudfront.net/sites/default/files/imagecache/ppv4_main_book_cover/2681OS.jpg" class="bookimage" />
+					</a>
+				</span>
+                			</div>
+			
+<div class="share-buttons-line share-buttons-small">
+	<div class="share-icon-background">
+		<a class="share-link" target="_blank" href="http://www.linkedin.com/shareArticle?mini=true&url=https://www.packtpub.com/big-data-and-business-intelligence/mastering-apache-cassandra&title=Mastering+Apache+Cassandra&source=Packt+Publishing&summary=Mastering+Apache+Cassandra">
+			<div class="share-icon linkedin"></div>
+		</a>
+	</div>
+	<div class="share-icon-background">
+		<a class="share-link" target="_blank" href="https://www.twitter.com/share?url=https://www.packtpub.com/big-data-and-business-intelligence/mastering-apache-cassandra&text=Mastering Apache Cassandra">
+			<div class="share-icon twitter"></div>
+		</a>
+	</div>
+	<div class="share-icon-background">
+		<a class="share-link" target="_blank" href="http://www.facebook.com/sharer.php?u=https://www.packtpub.com/big-data-and-business-intelligence/mastering-apache-cassandra">
+			<div class="share-icon facebook"></div>
+		</a>
+	</div>
+	<div class="share-icon-background last">
+		<a class="share-link" target="_blank" href="https://plusone.google.com/_/+1/confirm?hl=en&url=https://www.packtpub.com/big-data-and-business-intelligence/mastering-apache-cassandra">
+			<div class="share-icon google-plus"></div>
+		</a>
+	</div>
+</div>		</div>
+		<div class="book-top-block-info left">
+			<div class="book-top-block-info-title float-left">
+				<h1 itemprop="name">Mastering Apache Cassandra</h1>
+			</div>
+			<div class="book-top-block-info-level show-level-info cf float-right">
+				<div class="book-level-information float-right"></div>
+				<div class="book-level-text-info float-right">
+					Mastering				</div>
+				<div class="book-level-2 float-right"></div>
+
+			</div>
+			<div class="book-top-block-info-anl">
+				<div class="book-top-block-info-authors left">
+															Nishant Neeraj<br />
+										<time itemprop="datePublished" datetime="2013-10-25">October 2013</time><br />
+					
+                    <div class="book-top-block-star-rating" itemprop="aggregateRating" itemtype="http://schema.org/AggregateRating" itemscope>
+                        <meta itemprop="reviewCount" content="1" />
+                        <meta itemprop="ratingValue" content="5" />
+                        <div class="book-block-star active-star "></div><div class="book-block-star active-star "></div><div class="book-block-star active-star "></div><div class="book-block-star active-star "></div><div class="book-block-star active-star "></div><img src='//dz13w8afd47il.cloudfront.net/sites/all/themes/packt_v4/images/feefo-logo-simple.png' class='left simple-feefo-logo' /><div class='rating-count'>1 customer reviews</div>                    </div>
+                </div>
+				<!--div class="book-top-block-info-level show-level-info float-right"-->
+									<!--/div-->
+			</div>
+			<div class="book-top-block-info-one-liner cf">
+				Learn how to build more robust, scalable databases using Cassandra. From beginners to intermediates, this practical guide covers all the bases to help you get the most out of your infrastructure and using the full potential of Cassandra.			</div>
+			                        			
+<div class="book-top-pricing-block" itemprop="offers" itemtype="http://schema.org/Offer" itemscope>
+	<meta itemprop="priceCurrency" content="EUR"/>
+	<div class="book-top-pricing-price">
+		<div class="book-top-pricing-main-price">
+							<meta itemprop="price" content="25.81"/>
+				<div class="book-top-pricing-main-ebook-price ">
+					€25.81				</div>
+										<div class="book-top-pricing-main-book-price ">
+					€34.99				</div>
+					</div>
+		<div class="book-top-pricing-rrp">
+							<div class="book-top-pricing-rrp-ebook">
+                    RRP €25.81				</div>
+										<div class="book-top-pricing-rrp-book">
+                    RRP €34.99				</div>
+					</div>
+	</div>
+
+			<div class="book-top-type-selection">
+			<div class="book-type-select-ebook " type="ebooks">
+				<div class="book-type-select-dot-outer active-checkbox">
+					<div class="book-type-select-dot-inner">
+						<div class="book-type-select-dot-inner-active"></div>
+					</div>
+				</div>
+				<span itemprop="itemOffered">eBook</span>
+			</div>
+							<div class="book-type-select-print book-type-disabled" type="books">
+					<div class="book-type-select-dot-outer">
+						<div class="book-type-select-dot-inner">
+							<div class="book-type-select-dot-inner-active"></div>
+						</div>
+					</div>
+					Print + eBook				</div>
+					</div>
+	
+</div>
+
+	<span itemprop="offers" itemtype="http://schema.org/Offer" itemscope>
+		<meta itemprop="itemOffered" content="Print + eBook" />
+		<meta itemprop="price" content="34.99" />
+		<meta itemprop="priceCurrency" content="EUR" />
+	</span>
+
+		</div>
+
+	</div>
+
+		<div class="book-top-addtocart">
+						<div class="digital-product " data-product="true" data-product-id="13964" data-product-price="25.81" data-product-title="Mastering Apache Cassandra" data-product-type="ebooks" data-product-brand="Packt Publishing" data-product-category="Big Data &amp; Business Intelligence">
+				<form action="/add_to_cart/13964"  accept-charset="UTF-8" method="post" id="packt-libraries-add-to-cart-form-ebook" class="packt-libraries-add-to-cart-form">
+<div>
+<div class="book-top-addtocart-inner">	
+	<div class="book-top-addtocart-logo"></div>
+	<div class="book-top-addtocart-separator"></div>
+	
+	<input type="submit" name="submit-13964" id="submit-13964" value="Add to Cart"  class=" form-submit" />
+	<input type="hidden" name="nids" id="nids" value="13964"  />
+
+<input type="hidden" name="qtys" id="qtys" value="1"  />
+
+<input type="hidden" name="upsell" id="edit-upsell" value="1"  />
+
+
+
+
+
+
+<input type="hidden" name="form_build_id" id="form-32b7019af3f6c4e09bb56f6db40faad2" value="form-32b7019af3f6c4e09bb56f6db40faad2"  />
+
+<input type="hidden" name="form_id" id="edit-packt-libraries-add-to-cart-form-ebook" value="packt_libraries_add_to_cart_form_ebook"  />
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+</div></form>
+			</div>
+							<div class="physical-product" data-product="true" data-product-id="13965" data-product-price="34.99" data-product-title="Mastering Apache Cassandra" data-product-type="books" data-product-brand="Packt Publishing" data-product-category="Big Data &amp; Business Intelligence">
+				<form action="/add_to_cart/13965/13964"  accept-charset="UTF-8" method="post" id="packt-libraries-add-to-cart-form-ebook-1" class="packt-libraries-add-to-cart-form">
+<div>
+<div class="book-top-addtocart-inner">	
+	<div class="book-top-addtocart-logo"></div>
+	<div class="book-top-addtocart-separator"></div>
+	
+	<input type="submit" name="submit-13965,13964" id="submit-13965,13964" value="Add to Cart"  class=" form-submit" />
+	<input type="hidden" name="nids" id="nids" value="13965,13964"  />
+
+<input type="hidden" name="qtys" id="qtys" value="1,1"  />
+
+<input type="hidden" name="upsell" id="edit-upsell-1" value="1"  />
+
+
+
+
+
+
+<input type="hidden" name="form_build_id" id="form-9725d050e4d0916712cdc81e8bfac11b" value="form-9725d050e4d0916712cdc81e8bfac11b"  />
+
+<input type="hidden" name="form_id" id="edit-packt-libraries-add-to-cart-form-ebook-1" value="packt_libraries_add_to_cart_form_ebook"  />
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+</div></form>
+			</div>
+				</div>
+
+	
+			<div class="book-top-subscribe cf" itemprop="offers" itemtype="http://schema.org/Offer" itemscope>
+		<meta itemprop="price" content="30.73" />
+		<meta itemprop="priceCurrency" content="EUR" />
+		<div class="book-top-subscribe-upsell">
+			<div class="book-top-subscribe-price-block cf">
+				<div style="margin-top: 8px;"><span style="color: #333; font-size: 14px;"><span style="font-size: 2em; font-weight: 500;">€30.73</span> p/month</span></div>			</div>
+			<a id="subscription-upsell-button" href="/add_to_cart/23569">
+				<div class="book-top-subscribe-subscribe-button"
+											style="background-color: #F76D35"
+					>
+					<div class="book-top-subscribe-logo"><img src="//d255esdrn735hr.cloudfront.net/" class="bookimage" /></div>
+					<div class="book-top-subscribe-text">
+						<p style="color: #fff;">Start your FREE month</p>					</div>
+				</div>
+			</a>
+		</div>
+		<div class="book-top-subscribe-blurb">
+			<h4 style="color: #333a40; font-size: 18.2000007629395px; font-family: Ubuntu, sans-serif;">Get unlimited access to this and 3,500 other courses today!</h4>			<div class="book-top-subscribe-blurb-text">
+				<p><span style="font-size: 14px; font-family: Ubuntu, sans-serif; background-color: #eaeceb;">With unlimited access to a constantly growing library of over 3,500 courses, a subscription to Mapt gives you everything you need to get that next promotion or to land that dream job. Cancel anytime. </span></p>			</div>
+		</div>
+	</div>
+	
+</div>
+	</div>
+
+	<div class="book-interaction-wrapper cf">
+		<div class="section-inner book-interaction-inner">
+			
+<div class="book-top-block-code book-button float-right ">
+			<a href="/lcode_download/13965">
+				<div class="book-top-block-code-button logged-in">
+			<div class="book-top-block-code-logo"></div>
+			<div class="book-top-block-code-text">
+				Code Files
+			</div>
+		</div>
+		</a>
+	</div>
+
+<div class="book-top-block-collect book-button float-right booknotowned">
+	<div class="book-top-block-collect-button not-in-collection" nid="13965" title="Mastering Apache Cassandra">
+		<div class="book-top-block-collect-logo">
+		</div>
+		<div class="book-top-block-collect-text">
+			+ Collection		</div>
+	</div>
+</div>
+<div class="book-top-block-readonline book-button float-right buttons-free-sample  booknotowned ">
+    <div class="book-top-block-readonline-button showPacktLibReaderNewWindow"
+        nid="13965"
+        category="Big Data &amp; Business Intelligence"
+        isbn="9781782162681"
+        type="book">
+		<div class="book-top-block-readonline-logo "></div>
+		<div class="book-top-block-readonline-text">
+        Free Sample		</div>
+
+	</div>
+</div>
+		</div>
+	</div>
+	<div class="book-info-outer cf">
+		<div class="book-info-wrapper cf section-inner">
+
+			<div class="book-info-details onlyDesktop">
+				<h2>Book Details</h2>
+				<div class="book-info-details-text">
+					<div class="book-info-isbn13">
+						<span class="label">ISBN 13</span><span itemprop="isbn">9781782162681</span>
+					</div>
+					<div class="book-info-nb-page">
+						<span class="label">Paperback</span><span itemprop="numberOfPages">340</span> pages
+					</div>
+				</div>
+			</div>
+
+			<div class="book-info-about-audience float-right">
+				<div class="book-info-bottom-indetail book-page-content float-right">
+									<h2>Book Description</h2>
+									<div class="book-info-bottom-indetail-text" itemprop="description">
+										<p>Apache Cassandra is the perfect choice for building fault tolerant and scalable databases. Implementing Cassandra will enable you to take advantage of its features which include replication of data across multiple datacenters with lower latency rates. This book details these features that will guide you towards mastering the art of building high performing databases without compromising on performance.</p>
+<p>Mastering Apache Cassandra aims to give enough knowledge to enable you to program pragmatically and help you understand the limitations of Cassandra. You will also learn how to deploy a production setup and monitor it, understand what happens under the hood, and how to optimize and integrate it with other software.</p>
+<p>Mastering Apache Cassandra begins with a discussion on understanding Cassandra’s philosophy and design decisions while helping you understand how you can implement it to resolve business issues and run complex applications simultaneously.</p>
+<p>You will also get to know about how various components of Cassandra work with each other to give a robust distributed system. The different mechanisms that it provides to solve old problems in new ways are not as twisted as they seem; Cassandra is all about simplicity. Learn how to set up a cluster that can face a tornado of data reads and writes without wincing.</p>
+<p>If you are a beginner, you can use the examples to help you play around with Cassandra and test the water. If you are at an intermediate level, you may prefer to use this guide to help you dive into the architecture. To a DevOp, this book will help you manage and optimize your infrastructure. To a CTO, this book will help you unleash the power of Cassandra and discover the resources that it requires.</p>
+
+									</div>
+								</div>			</div>
+		</div>
+	</div>
+	<div class="book-info-outer second-level-info cf">
+		<div class="book-info-bottom-wrapper section-inner cf">
+			<div id="book-info-toc" class="float-left onlyDesktop">
+				<h2>Table of Contents</h2>
+				<div class="book-info-toc-text">
+																																																																																															<div class="book-toc-chapter">
+								<div class="book-toc-chapter-title">
+									<span class="chapter">Chapter </span>1: Quick Start								</div>
+								<div class="book-toc-sections-wrapper">
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Introduction to Cassandra</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">A brief introduction to a data model</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Installing Cassandra locally</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">CRUD with cassandra-cli</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Cassandra in action</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Summary</div>
+										</div>
+																	</div>
+							</div>
+																								<div class="book-toc-chapter">
+								<div class="book-toc-chapter-title">
+									<span class="chapter">Chapter </span>2: Cassandra Architecture								</div>
+								<div class="book-toc-sections-wrapper">
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Problems in the RDBMS world</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Enter NoSQL</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Cassandra</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Cassandra architecture</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Summary</div>
+										</div>
+																	</div>
+							</div>
+																								<div class="book-toc-chapter">
+								<div class="book-toc-chapter-title">
+									<span class="chapter">Chapter </span>3: Design Patterns								</div>
+								<div class="book-toc-sections-wrapper">
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">The Cassandra data model</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Patterns and antipatterns</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Summary</div>
+										</div>
+																	</div>
+							</div>
+																								<div class="book-toc-chapter">
+								<div class="book-toc-chapter-title">
+									<span class="chapter">Chapter </span>4: Deploying a Cluster								</div>
+								<div class="book-toc-sections-wrapper">
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Evaluating requirements</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">System configurations</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">The required software</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Installing Cassandra</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Configuring a Cassandra cluster</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Authorization and authentication</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Summary</div>
+										</div>
+																	</div>
+							</div>
+																								<div class="book-toc-chapter">
+								<div class="book-toc-chapter-title">
+									<span class="chapter">Chapter </span>5: Performance Tuning								</div>
+								<div class="book-toc-sections-wrapper">
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Stress testing</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Performance tuning</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Summary</div>
+										</div>
+																	</div>
+							</div>
+																								<div class="book-toc-chapter">
+								<div class="book-toc-chapter-title">
+									<span class="chapter">Chapter </span>6: Managing a Cluster – Scaling, Node Repair, and Backup								</div>
+								<div class="book-toc-sections-wrapper">
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Scaling</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Replacing a node</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Backup and restoration</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Load balancing</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Priam – managing large clusters on AWS</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Summary</div>
+										</div>
+																	</div>
+							</div>
+																								<div class="book-toc-chapter">
+								<div class="book-toc-chapter-title">
+									<span class="chapter">Chapter </span>7: Monitoring								</div>
+								<div class="book-toc-sections-wrapper">
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Cassandra JMX interface</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Cassandra nodetool</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">DataStax OpsCenter</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Nagios – monitoring and notification</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Cassandra log</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Troubleshooting</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Summary</div>
+										</div>
+																	</div>
+							</div>
+																								<div class="book-toc-chapter">
+								<div class="book-toc-chapter-title">
+									<span class="chapter">Chapter </span>8: Integration								</div>
+								<div class="book-toc-sections-wrapper">
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Using Hadoop</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Hadoop and Cassandra</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Cassandra with Hadoop MapReduce</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Cassandra and Hadoop in action</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Hadoop in Cassandra cluster</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Integration with Pig</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Cassandra and Solr</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Summary</div>
+										</div>
+																	</div>
+							</div>
+																								<div class="book-toc-chapter">
+								<div class="book-toc-chapter-title">
+									<span class="chapter">Chapter </span>9: Introduction to CQL 3 and Cassandra 1.2								</div>
+								<div class="book-toc-sections-wrapper">
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">CQL – the Cassandra Query Language</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">CQL 3 for Thrift refugees</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">CQL 3 basics</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">What's new in Cassandra 1.2?</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Support for programming languages</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Summary</div>
+										</div>
+																	</div>
+							</div>
+																											<div class="book-toc-chapter"></div>
+				</div>
+			</div>
+			<div id="book-info-will-learn" class="float-right book-page-content">
+					<h2>What You Will Learn</h2>
+					<div class="book-info-will-learn-text">
+						<ul>
+<li>Write programs using Cassandra’s features more efficiently</li>
+<li>Learn how to get the most out of a given infrastructure and Improve performance, tweak JVM</li>
+<li>Manage clusters and perform housekeeping activities</li>
+<li>Keep an eye on Cassandra processes and machines that hold the data store – get to know simple monitoring mechanisms, such as open sourced and proprietary ones</li>
+<li>Squeeze the value of the data that you hold in Cassandra</li>
+<li>Learn CQL 3 quickly and use Cassandra with Java, Python, NodeJS, Scala, and PHP</li>
+</ul>
+
+					</div>
+				</div>			<div class="book-info-bottom-author book-page-content float-right">
+					<h2>Authors</h2>
+					<div class="book-info-bottom-author-text">
+						<div itemprop="author" itemscope itemtype="http://schema.org/Person">
+						<div class="book-info-bottom-author-title" >
+							<h3 itemprop="name">Nishant Neeraj</h3>
+						</div>
+
+						<div class="book-info-bottom-author-body"  itemprop="description">
+							<p>Nishant Neeraj is an independent software developer with experience in developing and planning out architectures for massively scalable data storage and data processing systems. Over the years, he has helped design and implement a wide variety of products and systems for companies ranging from small start-ups to large multinational companies. Currently, he helps drive WealthEngine's core product to the next level by leveraging a variety of big data technologies.</p>
+						</div>
+					</div>
+					</div>
+				</div> 
+			<div id="book-info-toc" class="float-left onlyMobile">
+				<h2>Table of Contents</h2>
+				<div class="book-info-toc-text">
+																																																																																															<div class="book-toc-chapter">
+								<div class="book-toc-chapter-title">
+									<span class="chapter">Chapter </span>1: Quick Start								</div>
+								<div class="book-toc-sections-wrapper">
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Introduction to Cassandra</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">A brief introduction to a data model</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Installing Cassandra locally</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">CRUD with cassandra-cli</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Cassandra in action</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Summary</div>
+										</div>
+																	</div>
+							</div>
+																								<div class="book-toc-chapter">
+								<div class="book-toc-chapter-title">
+									<span class="chapter">Chapter </span>2: Cassandra Architecture								</div>
+								<div class="book-toc-sections-wrapper">
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Problems in the RDBMS world</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Enter NoSQL</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Cassandra</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Cassandra architecture</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Summary</div>
+										</div>
+																	</div>
+							</div>
+																								<div class="book-toc-chapter">
+								<div class="book-toc-chapter-title">
+									<span class="chapter">Chapter </span>3: Design Patterns								</div>
+								<div class="book-toc-sections-wrapper">
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">The Cassandra data model</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Patterns and antipatterns</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Summary</div>
+										</div>
+																	</div>
+							</div>
+																								<div class="book-toc-chapter">
+								<div class="book-toc-chapter-title">
+									<span class="chapter">Chapter </span>4: Deploying a Cluster								</div>
+								<div class="book-toc-sections-wrapper">
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Evaluating requirements</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">System configurations</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">The required software</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Installing Cassandra</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Configuring a Cassandra cluster</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Authorization and authentication</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Summary</div>
+										</div>
+																	</div>
+							</div>
+																								<div class="book-toc-chapter">
+								<div class="book-toc-chapter-title">
+									<span class="chapter">Chapter </span>5: Performance Tuning								</div>
+								<div class="book-toc-sections-wrapper">
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Stress testing</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Performance tuning</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Summary</div>
+										</div>
+																	</div>
+							</div>
+																								<div class="book-toc-chapter">
+								<div class="book-toc-chapter-title">
+									<span class="chapter">Chapter </span>6: Managing a Cluster – Scaling, Node Repair, and Backup								</div>
+								<div class="book-toc-sections-wrapper">
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Scaling</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Replacing a node</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Backup and restoration</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Load balancing</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Priam – managing large clusters on AWS</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Summary</div>
+										</div>
+																	</div>
+							</div>
+																								<div class="book-toc-chapter">
+								<div class="book-toc-chapter-title">
+									<span class="chapter">Chapter </span>7: Monitoring								</div>
+								<div class="book-toc-sections-wrapper">
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Cassandra JMX interface</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Cassandra nodetool</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">DataStax OpsCenter</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Nagios – monitoring and notification</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Cassandra log</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Troubleshooting</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Summary</div>
+										</div>
+																	</div>
+							</div>
+																								<div class="book-toc-chapter">
+								<div class="book-toc-chapter-title">
+									<span class="chapter">Chapter </span>8: Integration								</div>
+								<div class="book-toc-sections-wrapper">
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Using Hadoop</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Hadoop and Cassandra</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Cassandra with Hadoop MapReduce</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Cassandra and Hadoop in action</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Hadoop in Cassandra cluster</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Integration with Pig</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Cassandra and Solr</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Summary</div>
+										</div>
+																	</div>
+							</div>
+																								<div class="book-toc-chapter">
+								<div class="book-toc-chapter-title">
+									<span class="chapter">Chapter </span>9: Introduction to CQL 3 and Cassandra 1.2								</div>
+								<div class="book-toc-sections-wrapper">
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">CQL – the Cassandra Query Language</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">CQL 3 for Thrift refugees</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">CQL 3 basics</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">What's new in Cassandra 1.2?</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Support for programming languages</div>
+										</div>
+																			<div class="book-toc-section cf">
+											<div class="book-toc-section-circle float-left"></div>
+											<div class="book-toc-section-text float-left">Summary</div>
+										</div>
+																	</div>
+							</div>
+																											<div class="book-toc-chapter"></div>
+				</div>
+			</div>
+
+			<div class="book-info-details onlyMobile">
+				<h2>Book Details</h2>
+				<div class="book-info-details-text">
+					<div class="book-info-isbn13">
+						<span class="label">ISBN 13</span><span itemprop="isbn">9781782162681</span>
+					</div>
+					<div class="book-info-nb-page">
+						<span class="label">Paperback</span><span itemprop="numberOfPages">340</span> pages
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+    <div class="book-info-bottom-readmore cf">
+		<div class="book-info-bottom-readmore-button">
+			Read More
+		</div>
+	</div>
+
+    <div id="product-reviews" class="product-reviews" data-startpoint="1" data-isbn="9781782162681">
+    <div class="section-inner">
+        <div class="product-reviews-header">
+            <div class="product-reviews-cover-img left">
+                <img src="//d255esdrn735hr.cloudfront.net/sites/default/files/2681OS.jpg"/>
+            </div>
+            <div class="product-reviews-rating left">
+                <div class="reviews-feefo-logo">
+                    <img src="//d1ldz4te4covpm.cloudfront.net/sites/all/themes/packt_v4/images/feefo-logo.png"/>
+                </div>
+
+                <div class="feefo-review-star-rating">
+                    <div class="book-block-star active-star large-stars"></div><div class="book-block-star active-star large-stars"></div><div class="book-block-star active-star large-stars"></div><div class="book-block-star active-star large-stars"></div><div class="book-block-star active-star large-stars"></div><div class='rating-count'>From 1 reviews</div>                </div>
+            </div>
+        </div>
+
+        <div class="product-reviews-body left">
+            <div class="product-reviews-review" id='product-example-review'>
+                <div class="review-header left">
+                    <div class="review-rating left">
+                        <div class="left first-rating-icon"></div>
+                        <div class="left second-rating-icon"></div>
+                    </div>
+
+                    <div class="reviewer-name left"></div>
+                    <div class="review-date right"></div>
+                </div>
+
+                <div class="review-body left">
+                    <div class="opening-quote-symbol"></div>
+                    <p class="left"></p>
+                    <div class="closing-quote-symbol"></div>
+                </div>
+            </div>
+
+            <div class="product-reviews-response" id="product-example-response">
+                <div class="review-packt-logo left">
+                    <img src="//dz13w8afd47il.cloudfront.net/sites/default/files/packt_logo.png" />
+                </div>
+                <p class="right"></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="product-reviews-more-container">
+        <div class="product-reviews-more">Read More Reviews</div>
+    </div>
+</div>
+
+	<div class="book-info-outer book-info-outer-reviews cf">
+		<div class="book-reviews section-inner cf">
+			<div class="hero-blocks cf">
+																						<a href="/books/deal-of-the-day">
+	
+	<div class="hero-block  bg-d92238" style="background-color: #d92238; ">
+		<div class="hero-block-body">
+			<h3><strong>DEAL OF THE DAY</strong></h3>
+<p>Sign up here to get exclusive deep discounts on our latest and bestselling eBooks, delivered straight to your inbox every day.</p>		</div>
+	</div>
+</a>
+														<a href="/packt/offers/free-learning">
+	
+	<div class="hero-block last bg-ffffff" style="background-color: #ffffff; background-image: url(/sites/default/files/free-learning-hero-book-page.png);">
+		<div class="hero-block-body">
+			<h3>FREE LEARNING FOREVER</h3>
+<p>Master new IT skills and unlock valuable software &amp; web development knowledge with a FREE eBook every day.</p>		</div>
+	</div>
+</a>
+							</div>
+		</div>
+	</div>
+	<div class="book-to-consider cf">
+		<div class="book-to-consider-inner section-inner">
+			<div class="book-to-consider-text">
+				<h3>Recommended for You
+
+				</h3>
+			</div>
+			            <div class="book-to-consider-books">
+				<div class="book-to-consider-books-inner">
+                                                <div class="book-block-outer">
+                                
+		
+	<div class="book-block-outer " itemscope itemtype="http://schema.org/Product" data-product="true" data-product-id="22279" data-product-position="1" data-product-price="31.96" data-product-title="Cassandra Design Patterns - Second Edition" data-product-type="books" data-product-brand="Packt Publishing" data-product-category="Big Data & Business Intelligence">
+		<div class="book-block">
+			<div class="book-block-icon-books">
+			</div>
+							<noscript>
+					<img src="//d1ldz4te4covpm.cloudfront.net/sites/default/files/imagecache/featured_book_block/5707OS_4752_Cassandra Design Patterns.jpg" class="bookimage "  />
+				</noscript>
+				<img src="/sites/default/files/blank.gif" data-original="//d1ldz4te4covpm.cloudfront.net/sites/default/files/imagecache/featured_book_block/5707OS_4752_Cassandra Design Patterns.jpg" class="bookimage " />
+						<div class="book-block-title" itemprop="name">
+				Cassandra Design Patterns - Second Edition			</div>
+			<div class="book-block-price " itemprop="offers" itemtype="http://schema.org/Offer" itemscope>
+				<meta itemprop="price" content="31.96"/>
+				<meta itemprop="priceCurrency" content="EUR"/>
+				€ 31.96			</div>
+			<div class="book-block-overlay">
+				<a href="/big-data-and-business-intelligence/cassandra-design-patterns-second-edition">
+					<div class="book-block-one-liner ellipsis" itemprop="description">
+						<div>Build real-world, industry-strength data storage solutions with time-tested design methodologies using Cassandra</div>
+					</div>
+                    <div class="feefo-review-star-rating">
+                                            </div>
+				</a>
+				<div class="book-block-buttons ">
+					<button type="button" class="book-block-collection not-in-collection" nid="22279" title="Cassandra Design Patterns - Second Edition">+ Collection</button>
+											<button type="submit" nid="22279" action="/add_to_cart/22278" class="book-block-buy  ">€31.96</button>
+									</div>
+			</div>
+		</div>
+	</div>
+                            </div>
+                                                    <div class="book-block-outer">
+                                
+		
+	<div class="book-block-outer  book-block-position-2" itemscope itemtype="http://schema.org/Product" data-product="true" data-product-id="16424" data-product-position="2" data-product-price="13.51" data-product-title="Cassandra Design Patterns" data-product-type="books" data-product-brand="Packt Publishing" data-product-category="Networking & Servers">
+		<div class="book-block">
+			<div class="book-block-icon-books">
+			</div>
+							<noscript>
+					<img src="//d255esdrn735hr.cloudfront.net/sites/default/files/imagecache/featured_book_block/8809OS_Cassandra Design Patterns.jpg" class="bookimage "  />
+				</noscript>
+				<img src="/sites/default/files/blank.gif" data-original="//d255esdrn735hr.cloudfront.net/sites/default/files/imagecache/featured_book_block/8809OS_Cassandra Design Patterns.jpg" class="bookimage " />
+						<div class="book-block-title" itemprop="name">
+				Cassandra Design Patterns			</div>
+			<div class="book-block-price " itemprop="offers" itemtype="http://schema.org/Offer" itemscope>
+				<meta itemprop="price" content="13.51"/>
+				<meta itemprop="priceCurrency" content="EUR"/>
+				€ 13.51			</div>
+			<div class="book-block-overlay">
+				<a href="/networking-and-servers/cassandra-design-patterns">
+					<div class="book-block-one-liner ellipsis" itemprop="description">
+						<div>This book is a fantastic guide to the ins and outs of the Cassandra database solution and how to apply the right design patterns in real-world situations. An essential tutorial for architects and developers.</div>
+					</div>
+                    <div class="feefo-review-star-rating">
+                                            </div>
+				</a>
+				<div class="book-block-buttons ">
+					<button type="button" class="book-block-collection not-in-collection" nid="16424" title="Cassandra Design Patterns">+ Collection</button>
+											<button type="submit" nid="16424" action="/add_to_cart/16423" class="book-block-buy  ">€13.51</button>
+									</div>
+			</div>
+		</div>
+	</div>
+                            </div>
+                                                    <div class="book-block-outer">
+                                
+		
+	<div class="book-block-outer  book-block-position-3" itemscope itemtype="http://schema.org/Product" data-product="true" data-product-id="16424" data-product-position="3" data-product-price="13.51" data-product-title="Cassandra Design Patterns" data-product-type="books" data-product-brand="Packt Publishing" data-product-category="Networking & Servers">
+		<div class="book-block">
+			<div class="book-block-icon-books">
+			</div>
+							<noscript>
+					<img src="//d255esdrn735hr.cloudfront.net/sites/default/files/imagecache/featured_book_block/8809OS_Cassandra Design Patterns.jpg" class="bookimage "  />
+				</noscript>
+				<img src="/sites/default/files/blank.gif" data-original="//d255esdrn735hr.cloudfront.net/sites/default/files/imagecache/featured_book_block/8809OS_Cassandra Design Patterns.jpg" class="bookimage " />
+						<div class="book-block-title" itemprop="name">
+				Cassandra Design Patterns			</div>
+			<div class="book-block-price " itemprop="offers" itemtype="http://schema.org/Offer" itemscope>
+				<meta itemprop="price" content="13.51"/>
+				<meta itemprop="priceCurrency" content="EUR"/>
+				€ 13.51			</div>
+			<div class="book-block-overlay">
+				<a href="/networking-and-servers/cassandra-design-patterns">
+					<div class="book-block-one-liner ellipsis" itemprop="description">
+						<div>This book is a fantastic guide to the ins and outs of the Cassandra database solution and how to apply the right design patterns in real-world situations. An essential tutorial for architects and developers.</div>
+					</div>
+                    <div class="feefo-review-star-rating">
+                                            </div>
+				</a>
+				<div class="book-block-buttons ">
+					<button type="button" class="book-block-collection not-in-collection" nid="16424" title="Cassandra Design Patterns">+ Collection</button>
+											<button type="submit" nid="16424" action="/add_to_cart/16423" class="book-block-buy  ">€13.51</button>
+									</div>
+			</div>
+		</div>
+	</div>
+                            </div>
+                                                    <div class="book-block-outer">
+                                
+		
+	<div class="book-block-outer  book-block-position-2 book-block-position-4" itemscope itemtype="http://schema.org/Product" data-product="true" data-product-id="23718" data-product-position="4" data-product-price="49.18" data-product-title="Scala Design Patterns" data-product-type="books" data-product-brand="Packt Publishing" data-product-category="Application Development">
+		<div class="book-block">
+			<div class="book-block-icon-books">
+			</div>
+							<noscript>
+					<img src="//d255esdrn735hr.cloudfront.net/sites/default/files/imagecache/featured_book_block/2500_4953_Scala Design Patterns.jpg" class="bookimage "  />
+				</noscript>
+				<img src="/sites/default/files/blank.gif" data-original="//d255esdrn735hr.cloudfront.net/sites/default/files/imagecache/featured_book_block/2500_4953_Scala Design Patterns.jpg" class="bookimage " />
+						<div class="book-block-title" itemprop="name">
+				Scala Design Patterns			</div>
+			<div class="book-block-price " itemprop="offers" itemtype="http://schema.org/Offer" itemscope>
+				<meta itemprop="price" content="49.18"/>
+				<meta itemprop="priceCurrency" content="EUR"/>
+				€ 49.18			</div>
+			<div class="book-block-overlay">
+				<a href="/application-development/scala-design-patterns">
+					<div class="book-block-one-liner ellipsis" itemprop="description">
+						<div>Write efficient, clean, and reusable code with Scala</div>
+					</div>
+                    <div class="feefo-review-star-rating">
+                        <div class="book-block-star active-star "></div><div class="book-block-star active-star "></div><div class="book-block-star active-star "></div><div class="book-block-star active-star "></div><div class="book-block-star "></div><img src='//dz13w8afd47il.cloudfront.net/sites/all/themes/packt_v4/images/feefo-logo-simple.png' class='left simple-feefo-logo' />                    </div>
+				</a>
+				<div class="book-block-buttons ">
+					<button type="button" class="book-block-collection not-in-collection" nid="23718" title="Scala Design Patterns">+ Collection</button>
+											<button type="submit" nid="23718" action="/add_to_cart/23717" class="book-block-buy  ">€49.18</button>
+									</div>
+			</div>
+		</div>
+	</div>
+                            </div>
+                                                    <div class="book-block-outer">
+                                
+		
+	<div class="book-block-outer  book-block-position-5" itemscope itemtype="http://schema.org/Product" data-product="true" data-product-id="19394" data-product-position="5" data-product-price="18.43" data-product-title="Continuous Delivery and DevOps – A Quickstart Guide - Second Edition" data-product-type="books" data-product-brand="Packt Publishing" data-product-category="Application Development">
+		<div class="book-block">
+			<div class="book-block-icon-books">
+			</div>
+							<noscript>
+					<img src="//d1ldz4te4covpm.cloudfront.net/sites/default/files/imagecache/featured_book_block/3658_9313OS_Continuous Delivery and DevOps - A Quickstart Guide Second Edition_cov_0.jpg" class="bookimage "  />
+				</noscript>
+				<img src="/sites/default/files/blank.gif" data-original="//d1ldz4te4covpm.cloudfront.net/sites/default/files/imagecache/featured_book_block/3658_9313OS_Continuous Delivery and DevOps - A Quickstart Guide Second Edition_cov_0.jpg" class="bookimage " />
+						<div class="book-block-title" itemprop="name">
+				Continuous Delivery and DevOps – A Quickstart Guide - Second Edition			</div>
+			<div class="book-block-price " itemprop="offers" itemtype="http://schema.org/Offer" itemscope>
+				<meta itemprop="price" content="18.43"/>
+				<meta itemprop="priceCurrency" content="EUR"/>
+				€ 18.43			</div>
+			<div class="book-block-overlay">
+				<a href="/application-development/continuous-delivery-and-devops-–-quickstart-guide-second-edition">
+					<div class="book-block-one-liner ellipsis" itemprop="description">
+						<div>Deliver quality software regularly and painlessly by adopting CD and DevOps</div>
+					</div>
+                    <div class="feefo-review-star-rating">
+                        <div class="book-block-star active-star "></div><div class="book-block-star active-star "></div><div class="book-block-star active-star "></div><div class="book-block-star active-star "></div><div class="book-block-star half-star "></div><img src='//dz13w8afd47il.cloudfront.net/sites/all/themes/packt_v4/images/feefo-logo-simple.png' class='left simple-feefo-logo' />                    </div>
+				</a>
+				<div class="book-block-buttons ">
+					<button type="button" class="book-block-collection not-in-collection" nid="19394" title="Continuous Delivery and DevOps – A Quickstart Guide - Second Edition">+ Collection</button>
+											<button type="submit" nid="19394" action="/add_to_cart/19393" class="book-block-buy  ">€18.43</button>
+									</div>
+			</div>
+		</div>
+	</div>
+                            </div>
+                                                     <div class="end-of-shelf book-block-outer">
+                                
+		
+	<div class="book-block-outer  book-block-position-2 book-block-position-3" itemscope itemtype="http://schema.org/Product" data-product="true" data-product-id="10764" data-product-position="6" data-product-price="14.74" data-product-title="Continuous Delivery and DevOps: A Quickstart guide" data-product-type="books" data-product-brand="Packt Publishing" data-product-category="Application Development">
+		<div class="book-block last">
+			<div class="book-block-icon-books">
+			</div>
+							<noscript>
+					<img src="//d1ldz4te4covpm.cloudfront.net/sites/default/files/imagecache/featured_book_block/9781849693684.png" class="bookimage "  />
+				</noscript>
+				<img src="/sites/default/files/blank.gif" data-original="//d1ldz4te4covpm.cloudfront.net/sites/default/files/imagecache/featured_book_block/9781849693684.png" class="bookimage " />
+						<div class="book-block-title" itemprop="name">
+				Continuous Delivery and DevOps: A Quickstart guide			</div>
+			<div class="book-block-price " itemprop="offers" itemtype="http://schema.org/Offer" itemscope>
+				<meta itemprop="price" content="14.74"/>
+				<meta itemprop="priceCurrency" content="EUR"/>
+				€ 14.74			</div>
+			<div class="book-block-overlay">
+				<a href="/application-development/continuous-delivery-and-devops-quickstart-guide">
+					<div class="book-block-one-liner ellipsis" itemprop="description">
+						<div>Streamline and optimize your workflow with this fast and engaging guide to continuous delivery and DevOps. Delivering quality software every time will become a way of life.</div>
+					</div>
+                    <div class="feefo-review-star-rating">
+                        <div class="book-block-star active-star "></div><div class="book-block-star active-star "></div><div class="book-block-star active-star "></div><div class="book-block-star active-star "></div><div class="book-block-star active-star "></div><img src='//dz13w8afd47il.cloudfront.net/sites/all/themes/packt_v4/images/feefo-logo-simple.png' class='left simple-feefo-logo' />                    </div>
+				</a>
+				<div class="book-block-buttons ">
+					<button type="button" class="book-block-collection not-in-collection" nid="10764" title="Continuous Delivery and DevOps: A Quickstart guide">+ Collection</button>
+											<button type="submit" nid="10764" action="/add_to_cart/10763" class="book-block-buy  ">€14.74</button>
+									</div>
+			</div>
+		</div>
+	</div>
+                            </div>
+                                        </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+					 								</div>
+						<!-- /#content -->
+					
+									</div>
+			</div>
+									
+						
+			<!-- #footer -->
+			<div id="footer" class="region region-footer">
+				<div class="section-inner cf">
+					<div class="footer-main-block">
+						<div class="footer-section-inner">
+														<h2>Contact Us</h2>
+							<p>Get in touch&nbsp;<a href="/books/info/packt/contact-us">here</a>&nbsp;<span style="font-family: Calibri, sans-serif; font-size: 11pt; line-height: 115%;">if you have any queries or issues.</span></p>						</div>
+					</div>
+					<div class="footer-main-block middle-footer-block">
+						<div class="footer-section-inner">
+														<h2>Help & Support</h2>
+							<p class="MsoNormal">Click&nbsp;<a href="/books/info/packt/faq">here</a>&nbsp;for FAQs, order information, T&amp;Cs, errata and code downloads.</p>						</div>
+					</div>
+					<div class="footer-main-block">
+						<div class="footer-section-inner">
+														<h2>Alerts & Offers</h2>
+							<p class="MsoNormal">Sign up to our emails for regular updates, bespoke offers, exclusive discounts and great free content.</p>							<form  accept-charset="UTF-8" method="post" id="packt-v3-subscribtion-dotd-form-1">
+<div><div class="form-item">
+ 
+</div>
+<div class="form-item" id="edit-mail-1-wrapper">
+ <input type="text" maxlength="128" name="mail" id="edit-mail-1" size="60" value="" placeholder="Enter your email address" class="form-text" />
+</div>
+<input type="hidden" name="newsletter_id" id="edit-newsletter-id-1" value=""  />
+<input type="submit" name="op" id="edit-submit-4" value="Submit"  class=" form-submit" />
+<input type="hidden" name="form_build_id" id="form-4be5ae858cf74093878b890cb5c5a6b1" value="form-4be5ae858cf74093878b890cb5c5a6b1"  />
+<input type="hidden" name="form_id" id="edit-packt-v3-subscribtion-dotd-form-1" value="packt_v3_subscribtion_dotd_form"  />
+
+</div></form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /#footer -->
+
+			<!-- #footer-bottom -->
+			<div id="footer-bottom" class="region region-footer-bottom">
+				<div class="section-inner cf">
+					<div class="footer-bottom-block">
+						<div class="footer-bottom-block-left">
+							&copy; Packt Publishing Limited.
+							<br />
+							All Rights Reserved
+						</div>
+					</div>
+					<div class="footer-bottom-block footer-contact-us">
+						<a href="/books/info/packt/contact-us">Contact Us</a>
+					</div>
+					<div class="footer-bottom-block">
+						View our <a href="/books/info/packt/cookies">Cookie Policy</a>
+					</div>
+					<div class="footer-bottom-block">
+						Our <a href="/books/info/packt/privacy">Privacy Policy</a>
+					</div>
+					<div class="footer-bottom-block">
+						<a target="_blank" href="http://www.linkedin.com/company/packt-publishing" class="footer-social linkedin"></a>
+						<a target="_blank" href="http://twitter.com/packtpub" class="footer-social twitter"></a>
+						<a target="_blank" href="http://www.facebook.com/packtpub" class="footer-social facebook"></a>
+						<a target="_blank" href="https://plus.google.com/112328881995125817822" class="footer-social gplus"></a>
+						<a target="_blank" href="https://www.youtube.com/user/packt1000" class="footer-social youtube"></a>
+					</div>
+				</div>
+			</div>
+			<!-- /#footer-bottom -->
+			<script>
+			(function (w,i,d,g,e,t,s)
+			{w[d] = w[d]||[];t= i.createElement(g); t.async=1;t.src=e;s=i.getElementsByTagName(g)[0];s.parentNode.insertBefore(t, s); }
+			)(window, document, '_gscq','script','//widgets.getsitecontrol.com/18511/script.js');
+			</script>
+			
+						
+						
+		</div>
+		<!-- /#page -->
+		
+		<div id="content-overlay"></div>
+		
+					<div id="book-level-overlay" style="display: none;">	
+</div>
+<div id="book-level-lightbox" class="cf" style="display: none;">
+	<div class="book-level-lightbox-inner">
+		<div class="book-level-heading section-inner">
+			<h2>Series & Level <div class="book-level-cross"></div></h2>
+		</div>
+		<div class="section-inner cf">
+			<div class="book-level-underheading">
+				We understand your time is important. Uniquely amongst the major publishers, we seek to develop and publish the broadest range of learning and information products on each technology.  Every Packt product delivers a specific learning pathway, broadly defined by the Series type.  This structured approach enables you to select the pathway which best suits your knowledge level, learning style and task objectives.			
+			</div>
+		</div>
+		<div class="book-level-series">
+			<div class="section-inner book-level-series-inner cf">
+				<div class="three-book-series-row cf">
+					<div class="book-level-series-block">
+						<div class="cf">
+							<h3 class="float-left">Learning</h3>
+						</div>
+						<div class="book-level-series-text">
+							As a new user, these step-by-step tutorial guides will give you all the practical skills necessary to become competent and efficient.
+						</div>
+					</div>
+					<div class="book-level-series-block">
+						<div class="cf">
+							<h3 class="float-left">Beginner's Guide</h3>
+						</div>
+						<div class="book-level-series-text">
+							Friendly, informal tutorials that provide a practical introduction using examples, activities, and challenges.
+						</div>
+					</div>
+					<div class="book-level-series-block">
+						<div class="cf">
+							<h3 class="float-left">Essentials</h3>
+						</div>
+						<div class="book-level-series-text">
+							Fast paced, concentrated introductions showing the quickest way to put the tool to work in the real world.
+						</div>
+					</div>					
+				</div>
+				<div class="three-book-series-row cf">
+					<div class="book-level-series-block">
+						<div class="cf">
+							<h3 class="float-left">Cookbook</h3>
+						</div>
+						<div class="book-level-series-text">
+							A collection of practical self-contained recipes that all users of the technology will find useful for building more powerful and reliable systems.
+						</div>
+					</div>
+					<div class="book-level-series-block">
+						<div class="cf">
+							<h3 class="float-left">Blueprints</h3>
+						</div>
+						<div class="book-level-series-text">
+							Guides you through the most common types of project you'll encounter, giving you end-to-end guidance on how to build your specific solution quickly and reliably.
+						</div>
+					</div>
+					<div class="book-level-series-block">
+						<div class="cf">
+							<h3 class="float-left">Mastering</h3>
+						</div>
+						<div class="book-level-series-text">
+							Take your skills to the next level with advanced tutorials that will give you confidence to master the tool's most powerful features.
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="book-level-level">
+			<div class="section-inner cf">
+				<div class="book-level-expo float-left">
+					<h3>Starting</h3>
+					<div class="book-level-text">
+						Accessible to readers adopting the topic, these titles get you into the tool or technology so that you can become an effective user.
+					</div>
+				</div>
+				<div class="book-level-gauges float-left">
+					<div class="book-level-gauge-left"></div>
+					<div class="book-level-line"></div>
+					<!--div class="book-level-gauge-middle"></div>
+					<div class="book-level-line"></div-->
+					<div class="book-level-gauge-right"></div>
+				</div>
+				<div class="book-level-expo float-left">
+					<h3>Progressing</h3>
+					<div class="book-level-text">
+						Building on core skills you already have, these titles share solutions and expertise so you become a highly productive power user.
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+				
+	</body>
+</html>
+

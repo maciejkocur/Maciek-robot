@@ -22,9 +22,10 @@ public class DiscountFetchingController {
 
         List<BookStore> bookStores = new ArrayList<>();
         bookStores.add(BookStore.EMPIK);
+        bookStores.add(BookStore.PACKT);
         Collection<BookInfo> bookInfos = new DiscountFetchingService().fetch(bookStores);
 
-        StreamSupport.stream(bookInfos.spliterator(),false).forEach(bookInfo -> list.add(bookInfo));
+        StreamSupport.stream(bookInfos.spliterator(),false).forEach(list::add);
         model.addAttribute("books", list);
 
         return "index";

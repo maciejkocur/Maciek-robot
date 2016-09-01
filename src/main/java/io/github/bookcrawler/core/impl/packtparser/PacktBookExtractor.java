@@ -1,4 +1,4 @@
-package io.github.bookcrawler.core.impl.empik;
+package io.github.bookcrawler.core.impl.packtparser;
 
 import io.github.bookcrawler.core.BookExtractor;
 import io.github.bookcrawler.core.SourceScrapper;
@@ -8,24 +8,23 @@ import io.github.bookcrawler.entities.BookInfo;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static io.github.bookcrawler.core.BookStore.EMPIK;
+import static io.github.bookcrawler.core.BookStore.PACKT;
 
-public class EmpikBooksExtractor implements BookExtractor {
+public class PacktBookExtractor implements BookExtractor {
 
     private SourceScrapper sourceScrapper;
 
-    public EmpikBooksExtractor(SourceScrapper sourceScrapper) {
+    public PacktBookExtractor(SourceScrapper sourceScrapper) {
         this.sourceScrapper = sourceScrapper;
     }
 
     @Override
     public List<BookInfo> extract() {
-        return EMPIK.crawler().crawl(EMPIK.startUrl(), sourceScrapper)
-                .parallelStream()
+        return PACKT.crawler().crawl(PACKT.startUrl(), sourceScrapper)
+                .stream()
                 .map(sourceScrapper::scrap)
                 .filter(SourceScrappingResult::isSuccessful)
-                .map(EMPIK.parser()::parse)
+                .map(PACKT.parser()::parse)
                 .collect(Collectors.toList());
     }
 }
-
