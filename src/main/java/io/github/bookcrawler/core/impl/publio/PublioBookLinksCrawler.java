@@ -2,6 +2,7 @@ package io.github.bookcrawler.core.impl.publio;
 
 import io.github.bookcrawler.core.BooksLinkCrawler;
 import io.github.bookcrawler.core.SourceScrapper;
+import io.github.bookcrawler.core.impl.JsoupSourceScrapper;
 import io.github.bookcrawler.core.impl.SourceScrappingResult;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -50,7 +51,12 @@ public class PublioBookLinksCrawler implements BooksLinkCrawler {
     }
 
     private Integer getPageQuantity(SourceScrappingResult sourceScrappingResult) {
-        return Integer.valueOf(sourceScrappingResult.getSource().getElementsByAttributeValue("class", "pages-list").get(0).children().get(6).text());
+        return Integer.valueOf(sourceScrappingResult.getSource()
+                .getElementsByAttributeValue("class", "pages-list")
+                .get(0)
+                .children()
+                .get(6)
+                .text());
     }
 
     private Elements getBookElements(Document source) {
