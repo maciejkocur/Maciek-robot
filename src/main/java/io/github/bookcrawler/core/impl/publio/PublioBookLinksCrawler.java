@@ -6,23 +6,22 @@ import io.github.bookcrawler.core.impl.SourceScrappingResult;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
+import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static io.github.bookcrawler.core.BookStore.PUBLIO;
 
+@Component
 public class PublioBookLinksCrawler implements BooksLinkCrawler {
+
     @Override
     public List<String> crawl(String url, SourceScrapper sourceScrapper) {
-
         SourceScrappingResult sourceScrappingResult = sourceScrapper.scrap(url);
         if (!sourceScrappingResult.isSuccessful()) {
             return Collections.emptyList();
         }
-
         return getPageUrls(url, sourceScrapper, sourceScrappingResult)
                 .stream()
                 .map(sourceScrapper::scrap)
@@ -72,7 +71,7 @@ public class PublioBookLinksCrawler implements BooksLinkCrawler {
     }
 
     private String getLink(String i) {
-        return PUBLIO.domainUrl() + i;
+        return "http://www.publio.pl" + i;
     }
 
     private String href(Element e) {

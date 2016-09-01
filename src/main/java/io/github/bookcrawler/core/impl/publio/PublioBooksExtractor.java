@@ -1,28 +1,35 @@
 package io.github.bookcrawler.core.impl.publio;
 
 import io.github.bookcrawler.core.BookExtractor;
+import io.github.bookcrawler.core.BookStore;
 import io.github.bookcrawler.core.SourceScrapper;
 import io.github.bookcrawler.core.impl.SourceScrappingResult;
 import io.github.bookcrawler.entities.BookInfo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static io.github.bookcrawler.core.BookStore.PUBLIO;
-
+@Component
 public class PublioBooksExtractor implements BookExtractor {
-    private SourceScrapper sourceScrapper;
 
-    public PublioBooksExtractor(SourceScrapper sourceScrapper) {
-        this.sourceScrapper = sourceScrapper;
-    }
+    @Autowired
+    private PublioBookInfoParser publioBookInfoParser;
+
+    @Autowired
+    private BookStore publioBookStore;
+
+    @Autowired
+    private SourceScrapper jsoupSourceScapper;
+
 
     @Override
     public List<BookInfo> extract() {
-        return PUBLIO.crawler().crawl(PUBLIO.startUrl(), sourceScrapper).parallelStream()
-                .map(url -> sourceScrapper.scrap(url))
+        return publioBookStore.crawler().crawl(publioBookStore.startUrl(), jsoupSourceScapper).parallelStream()
+                .map(url -> jsoupSourceScapper.scrap(url))
                 .filter(SourceScrappingResult::isSuccessful)
-                .map(sourceScrappingResult -> PUBLIO.parser().parse(sourceScrappingResult))
+                .map(sourceScrappingResult -> publioBookInfoParser.parse(sourceScrappingResult))
                 .collect(Collectors.toList());
     }
 }

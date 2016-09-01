@@ -6,21 +6,28 @@ import io.github.bookcrawler.entities.BookInfo;
 import io.github.bookcrawler.entities.BookInfoBuilder;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-import static io.github.bookcrawler.core.BookStore.EMPIK;
+import java.util.Calendar;
 
+@Component
 public class EmpikBookInfoParser implements BookInfoParser {
+
+    @Autowired
+    private BookInfoBuilder bookInfoBuilder;
 
     @Override
     public BookInfo parse(SourceScrappingResult sourceScrappingResult) {
         Document source = sourceScrappingResult.getSource();
-        return new BookInfoBuilder()
+        return bookInfoBuilder
                 .title(parseTitle(source))
                 .author(parseAuthor(source))
                 .description(parseDescription(source))
                 .price(parsePrice(source))
-                .library(EMPIK.toString())
-                .url(EMPIK.domainUrl())
+                .library("EMPIK")
+                .url("http://www.empik.com")
+                .inputDate(Calendar.getInstance().getTime().getTime())
                 .build();
     }
 
@@ -29,7 +36,7 @@ public class EmpikBookInfoParser implements BookInfoParser {
     }
 
     private String parseAuthor(Element source) {
-        return getTextByAttribute(source, "pDAuthorList");
+        return getTextByAttribute(source, "pDAuthorList").replaceAll("[^A-Za-z\\p{L}]", " ").trim();
     }
 
     private String parseDescription(Element source) {

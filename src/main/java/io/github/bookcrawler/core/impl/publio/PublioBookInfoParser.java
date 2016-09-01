@@ -6,21 +6,28 @@ import io.github.bookcrawler.entities.BookInfo;
 import io.github.bookcrawler.entities.BookInfoBuilder;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-import static io.github.bookcrawler.core.BookStore.PUBLIO;
+import java.util.Calendar;
 
+@Component
 public class PublioBookInfoParser implements BookInfoParser {
+
+    @Autowired
+    private BookInfoBuilder bookInfoBuilder;
 
     @Override
     public BookInfo parse(SourceScrappingResult sourceScrappingResult) {
         Document source = sourceScrappingResult.getSource();
-        return new BookInfoBuilder()
+        return bookInfoBuilder
                 .title(parseTitle(source))
                 .author(parseAuthor(source))
                 .description(parseDescription(source))
                 .price(parsePrice(source))
-                .library(PUBLIO.toString())
+                .library("PUBLIO")
                 .url(source.location())
+                .inputDate(Calendar.getInstance().getTime().getTime())
                 .build();
     }
 
