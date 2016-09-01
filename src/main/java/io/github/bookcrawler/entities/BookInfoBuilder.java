@@ -1,15 +1,28 @@
 package io.github.bookcrawler.entities;
 
+import io.github.bookcrawler.cache.AuthorsCache;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+import java.sql.Date;
 import java.util.Set;
 
+@Component
+@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class BookInfoBuilder {
+
+    @Autowired
+    private AuthorsCache authorsCache;
 
     String title;
     String description;
     String price;
     String library;
     String url;
-    String author;
+    Date inputDate;
+    Author author;
     Set<Tag> tags;
 
     public BookInfoBuilder title(String title) {
@@ -38,13 +51,18 @@ public class BookInfoBuilder {
         return this;
     }
 
-    public BookInfoBuilder author(String author) {
-        this.author = author;
+    public BookInfoBuilder author(String authorName) {
+        this.author = authorsCache.getAuthorFromCache(authorName);
         return this;
     }
 
     public BookInfoBuilder tags(Set<Tag> tags) {
         this.tags = tags;
+        return this;
+    }
+
+    public BookInfoBuilder inputDate(Long inputDate) {
+        this.inputDate = new Date(inputDate);
         return this;
     }
 

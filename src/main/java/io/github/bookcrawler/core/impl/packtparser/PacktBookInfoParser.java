@@ -6,10 +6,16 @@ import io.github.bookcrawler.entities.BookInfo;
 import io.github.bookcrawler.entities.BookInfoBuilder;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import java.util.Calendar;
 
+@Component
 public class PacktBookInfoParser implements BookInfoParser {
 
+    @Autowired
+    private BookInfoBuilder bookInfoBuilder;
 
     private static final String LIBRARY_NAME = "Packt";
     private static final String PRICE = "free";
@@ -20,13 +26,15 @@ public class PacktBookInfoParser implements BookInfoParser {
     @Override
     public BookInfo parse(SourceScrappingResult sourceScrappingResult) {
         Document document = sourceScrappingResult.getSource();
-        return new BookInfoBuilder()
-                .title(getTitle(document))
+        return bookInfoBuilder.
+                title(getTitle(document))
                 .url(getLocation(document))
                 .author(getAuthor(document))
                 .description(getDescription(document))
                 .library(LIBRARY_NAME)
-                .price(PRICE).build();
+                .inputDate(Calendar.getInstance().getTime().getTime())
+                .price(PRICE)
+                .build();
     }
 
     private String getDescription(Document document) {

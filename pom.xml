@@ -29,6 +29,8 @@
         <hamcrest-library.version>1.3</hamcrest-library.version>
         <mockito-all.version>2.0.2-beta</mockito-all.version>
         <spring-test.version>4.3.2.RELEASE</spring-test.version>
+        <assertj-core.version>3.5.2</assertj-core.version>
+        <hsqldb-version>2.3.4</hsqldb-version>
     </properties>
 
     <dependencies>
@@ -37,7 +39,6 @@
             <artifactId>spring-webmvc</artifactId>
             <version>${spring-webmvc.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-taglibs -->
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-taglibs</artifactId>
@@ -104,14 +105,23 @@
             <artifactId>mockito-all</artifactId>
             <version>${mockito-all.version}</version>
             <scope>test</scope>
-            </dependency>
+        </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
             <version>${spring-test.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>${hsqldb-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj-core.version}</version>
+        </dependency>
     </dependencies>
-
     <build>
         <finalName>Maciek-robot</finalName>
         <pluginManagement>

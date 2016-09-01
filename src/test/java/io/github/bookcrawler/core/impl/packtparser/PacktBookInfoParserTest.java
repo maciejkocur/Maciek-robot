@@ -1,9 +1,15 @@
 package io.github.bookcrawler.core.impl.packtparser;
 
+import io.github.bookcrawler.config.ServletContextConfig;
 import io.github.bookcrawler.core.impl.SourceScrappingResult;
 import io.github.bookcrawler.entities.BookInfo;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.testng.annotations.Test;
 
 import java.io.File;
@@ -14,13 +20,18 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class PacktBookInfoParserTest {
+@WebAppConfiguration
+@ContextConfiguration(classes = {ServletContextConfig.class})
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
+public class PacktBookInfoParserTest extends AbstractTestNGSpringContextTests {
+
+    @Autowired
+    PacktBookInfoParser packtBookInfoParser;
 
     @Test
     public void testParsingBookElementsFromDocument() throws IOException {
 
         //given
-        PacktBookInfoParser packtBookInfoParser = new PacktBookInfoParser();
         SourceScrappingResult sourceScrappingResult = mock(SourceScrappingResult.class);
         Document source = Jsoup.parse(new File("src/test/java/io/github/bookcrawler/core/" +
                 "impl/packtparser/mastering_casandra_packt.html"), "UTF-8");

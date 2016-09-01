@@ -6,14 +6,15 @@ import io.github.bookcrawler.core.impl.SourceScrappingResult;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.stereotype.Component;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static io.github.bookcrawler.core.BookStore.EMPIK;
-
+@Component
 public class EmpikBookLinksCrawler implements BooksLinkCrawler {
+
 
     @Override
     public List<String> crawl(String url, SourceScrapper sourceScrapper) {
@@ -43,7 +44,7 @@ public class EmpikBookLinksCrawler implements BooksLinkCrawler {
     }
 
     private String getLink(String i) {
-        return EMPIK.domainUrl() + i;
+        return "http://www.empik.com" + i;
     }
 
     private String href(Element e) {
