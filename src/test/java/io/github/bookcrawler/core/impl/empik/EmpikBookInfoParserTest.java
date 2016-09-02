@@ -54,7 +54,6 @@ public class EmpikBookInfoParserTest extends AbstractTestNGSpringContextTests {
         assertEquals(parseBookInfo.getAuthor(), author);
         assertEquals(parseBookInfo.getDescription().substring(0, 40), description);
         assertEquals(parseBookInfo.getPrice(), price);
-        assertEquals(parseBookInfo.getUrl(), url);
         assertEquals(parseBookInfo.getLibrary(), library);
     }
 }
