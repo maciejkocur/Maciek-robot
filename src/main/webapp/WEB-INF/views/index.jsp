@@ -20,11 +20,12 @@
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown">Library to search books<b class="caret"></b></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="../fetch/Empik">Empik</a></li>
-                        <li><a href="../fetch/Empik">Another site</a></li>
-                        <li><a href="#">Yet another site</a></li>
+                        <li><a href="../fetch/EMPIK">Empik</a></li>
+                        <li><a href="../fetch/PUBLIO">Publio</a></li>
+                        <li><a href="../fetch/PACT">Pact</a></li>
+                        <li><a href="../fetch/HELION">Helion</a></li>
                         <li class="divider"></li>
-                        <li><a href="#">Most popular site</a></li>
+                        <li><a href="../fetch/All">All libraries</a></li>
                     </ul>
                 </li>
                 <form class="navbar-form navbar-left">

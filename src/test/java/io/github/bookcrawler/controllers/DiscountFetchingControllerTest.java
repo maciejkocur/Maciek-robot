@@ -1,6 +1,6 @@
 package io.github.bookcrawler.controllers;
 
-import io.github.bookcrawler.cache.impl.DatabaseCacheForAllUsers;
+import io.github.bookcrawler.cache.DatabaseCacheForDifferentLibraries;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -21,9 +21,9 @@ public class DiscountFetchingControllerTest {
     @BeforeMethod
     public void prepareController(){
         controller = new DiscountFetchingController();
-        DatabaseCacheForAllUsers mockCache = mock(DatabaseCacheForAllUsers.class);
-        when(mockCache.getAllBooksInfo()).thenReturn(Collections.EMPTY_LIST);
-        controller.databaseCacheForAllUsers = mockCache;
+        DatabaseCacheForDifferentLibraries mockCache = mock(DatabaseCacheForDifferentLibraries.class);
+        when(mockCache.getAllBookInfos()).thenReturn(Collections.EMPTY_LIST);
+        controller.databaseCacheForDifferentLibraries = mockCache;
     }
 
     @Test

@@ -9,7 +9,8 @@
  <body>
   <div class="container-fluid">
     <div class="masthead buffer">
-        <h3 class="text-muted">Books from Empik</h3>
+
+        <h3 class="text-muted">Books from ${books.iterator().next().getLibrary()}</h3>
     </div>
     <div class="table-responsive">
         <table class="table table-striped">
@@ -41,7 +42,7 @@
                     <td>${bookInfo.getTitle()}</td>
                     <td>${bookInfo.getAuthor()}</td>
                     <td>${bookInfo.getPrice()}</td>
-                    <td>${bookInfo.getUrl()}</td>
+                    <td><a href='${bookInfo.getUrl()}'/> More...</td>
                     <td>Some_category</td>
                     <td>${bookInfo.getDescription()}</td>
                 </tr>
