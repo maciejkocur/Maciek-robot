@@ -1,6 +1,7 @@
 package io.github.bookcrawler.cache;
 
 import io.github.bookcrawler.entities.BookInfo;
+import io.github.bookcrawler.utilities.Library;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
@@ -16,7 +17,7 @@ public class DatabaseCacheForDifferentLibraries {
     }
 
     public List<BookInfo> getBookInfosFromLibrary(String library){
-        return bookInfosMap.getOrDefault(library, Collections.emptyList());
+        return bookInfosMap.getOrDefault(library, bookInfosMap.get(Library.HELION));
     }
 
     public List<BookInfo> getAllBookInfos(){
