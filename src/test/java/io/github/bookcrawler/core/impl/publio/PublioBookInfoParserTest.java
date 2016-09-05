@@ -1,15 +1,11 @@
 package io.github.bookcrawler.core.impl.publio;
 
-import io.github.bookcrawler.config.ServletContextConfig;
+import io.github.bookcrawler.cache.AuthorsCache;
 import io.github.bookcrawler.core.impl.SourceScrappingResult;
+import io.github.bookcrawler.entities.Author;
 import io.github.bookcrawler.entities.BookInfo;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.springframework.test.context.web.WebAppConfiguration;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -20,14 +16,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.testng.Assert.assertEquals;
 
-@WebAppConfiguration
-@ContextConfiguration(classes = {ServletContextConfig.class})
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
-public class PublioBookInfoParserTest extends AbstractTestNGSpringContextTests {
-
-    @Autowired
-    PublioBookInfoParser publioBookInfoParser;
-
+public class PublioBookInfoParserTest {
     @DataProvider
     public Object[][] books() {
         return new Object[][]{
@@ -39,6 +28,10 @@ public class PublioBookInfoParserTest extends AbstractTestNGSpringContextTests {
     @Test(dataProvider = "books")
     public void parsesPublioBook(String path, String title, String author, String description, String price, String library) throws IOException {
         // given
+        PublioBookInfoParser publioBookInfoParser = new PublioBookInfoParser();
+        AuthorsCache authorsCache = mock(AuthorsCache.class);
+        publioBookInfoParser.authorsCache = authorsCache;
+        when(authorsCache.getAuthorFromCache(author)).thenReturn(new Author(author));
         Document testedSource = Jsoup.parse(new File(path), "UTF-8");
 
         SourceScrappingResult sourceScrappingResultMock = mock(SourceScrappingResult.class);
