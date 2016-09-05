@@ -24,7 +24,7 @@ import static org.testng.Assert.assertTrue;
 @ContextConfiguration(classes = {DatabaseConfiguration.class, ServletContextConfig.class})
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @Transactional
-public class AuthorsCacheTest extends AbstractTestNGSpringContextTests {
+public class AuthorsCacheIT extends AbstractTestNGSpringContextTests {
 
     @Autowired
     private AuthorsRepository authorsRepository;
