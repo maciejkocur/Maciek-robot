@@ -1,7 +1,9 @@
 package io.github.bookcrawler.core.impl.empik;
 
+import io.github.bookcrawler.cache.AuthorsCache;
 import io.github.bookcrawler.core.BookInfoParser;
 import io.github.bookcrawler.core.impl.SourceScrappingResult;
+import io.github.bookcrawler.entities.Author;
 import io.github.bookcrawler.entities.BookInfo;
 import io.github.bookcrawler.entities.BookInfoBuilder;
 import org.jsoup.nodes.Document;
@@ -15,12 +17,12 @@ import java.util.Calendar;
 public class EmpikBookInfoParser implements BookInfoParser {
 
     @Autowired
-    private BookInfoBuilder bookInfoBuilder;
+    AuthorsCache authorsCache;
 
     @Override
     public BookInfo parse(SourceScrappingResult sourceScrappingResult) {
         Document source = sourceScrappingResult.getSource();
-        return bookInfoBuilder
+        return new BookInfoBuilder()
                 .title(parseTitle(source))
                 .author(parseAuthor(source))
                 .description(parseDescription(source))
@@ -35,8 +37,8 @@ public class EmpikBookInfoParser implements BookInfoParser {
         return getTextByAttribute(source, "productMainTitle");
     }
 
-    private String parseAuthor(Element source) {
-        return getTextByAttribute(source, "pDAuthorList").replaceAll("[^A-Za-z\\p{L}]", " ").trim();
+    private Author parseAuthor(Element source) {
+        return authorsCache.getAuthorFromCache(getTextByAttribute(source, "pDAuthorList").replaceAll("[^A-Za-z\\p{L}]", " ").trim());
     }
 
     private String parseDescription(Element source) {

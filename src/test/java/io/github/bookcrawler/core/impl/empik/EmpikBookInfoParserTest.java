@@ -1,15 +1,11 @@
 package io.github.bookcrawler.core.impl.empik;
 
-import io.github.bookcrawler.config.ServletContextConfig;
+import io.github.bookcrawler.cache.AuthorsCache;
 import io.github.bookcrawler.core.impl.SourceScrappingResult;
+import io.github.bookcrawler.entities.Author;
 import io.github.bookcrawler.entities.BookInfo;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.springframework.test.context.web.WebAppConfiguration;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -20,13 +16,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.testng.Assert.assertEquals;
 
-@WebAppConfiguration
-@ContextConfiguration(classes = {ServletContextConfig.class})
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
-public class EmpikBookInfoParserTest extends AbstractTestNGSpringContextTests {
-
-    @Autowired
-    private EmpikBookInfoParser empikBookInfoParser;
+public class EmpikBookInfoParserTest {
 
     @DataProvider
     public Object[][] books() {
@@ -38,11 +28,15 @@ public class EmpikBookInfoParserTest extends AbstractTestNGSpringContextTests {
 
     @Test(dataProvider = "books")
     public void parsesEmpikBook(String path, String title, String author, String description, String price, String url, String library) throws IOException {
-        // given
 
+        // given
+        EmpikBookInfoParser empikBookInfoParser = new EmpikBookInfoParser();
+        AuthorsCache authorsCache = mock(AuthorsCache.class);
+        SourceScrappingResult sourceScrappingResultMock = mock(SourceScrappingResult.class);
+        empikBookInfoParser.authorsCache = authorsCache;
         Document testedSource = Jsoup.parse(new File(path), "UTF-8");
 
-        SourceScrappingResult sourceScrappingResultMock = mock(SourceScrappingResult.class);
+        when(authorsCache.getAuthorFromCache(author)).thenReturn(new Author(author));
         when(sourceScrappingResultMock.isSuccessful()).thenReturn(true);
         when(sourceScrappingResultMock.getSource()).thenReturn(testedSource);
 

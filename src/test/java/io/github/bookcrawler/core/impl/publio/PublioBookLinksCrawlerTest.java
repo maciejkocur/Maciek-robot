@@ -1,14 +1,9 @@
 package io.github.bookcrawler.core.impl.publio;
 
-import io.github.bookcrawler.config.ServletContextConfig;
 import io.github.bookcrawler.core.SourceScrapper;
 import io.github.bookcrawler.core.impl.SourceScrappingResult;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.springframework.test.context.web.WebAppConfiguration;
 import org.testng.annotations.Test;
 
 import java.io.File;
@@ -20,8 +15,11 @@ import static org.mockito.Mockito.when;
 import static org.testng.Assert.assertEquals;
 
 public class PublioBookLinksCrawlerTest {
+
     @Test
     public void crawlEmpik() throws Exception {
+
+        // given
         PublioBookLinksCrawler empikBookLinksCrawler = new PublioBookLinksCrawler();
 
         SourceScrapper sourceScrapperMock = mock(SourceScrapper.class);
