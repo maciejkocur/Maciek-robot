@@ -51,7 +51,7 @@
                     <td>${bookInfo.getTitle()}</td>
                     <td>${bookInfo.getAuthor()}</td>
                     <td>${bookInfo.getPrice()}</td>
-                    <td><a href='${bookInfo.getUrl()}'></a> More...</td>
+                    <td><a href='${bookInfo.getUrl()}'>More...</a></td>
                     <td>Some_category</td>
                     <td>${bookInfo.getDescription()}</td>
                 </tr>

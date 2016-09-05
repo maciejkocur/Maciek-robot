@@ -1,7 +1,9 @@
 package io.github.bookcrawler.core.impl.publio;
 
+import io.github.bookcrawler.cache.AuthorsCache;
 import io.github.bookcrawler.core.BookInfoParser;
 import io.github.bookcrawler.core.impl.SourceScrappingResult;
+import io.github.bookcrawler.entities.Author;
 import io.github.bookcrawler.entities.BookInfo;
 import io.github.bookcrawler.entities.BookInfoBuilder;
 import org.jsoup.nodes.Document;
@@ -15,12 +17,12 @@ import java.util.Calendar;
 public class PublioBookInfoParser implements BookInfoParser {
 
     @Autowired
-    private BookInfoBuilder bookInfoBuilder;
+    AuthorsCache authorsCache;
 
     @Override
     public BookInfo parse(SourceScrappingResult sourceScrappingResult) {
         Document source = sourceScrappingResult.getSource();
-        return bookInfoBuilder
+        return new BookInfoBuilder()
                 .title(parseTitle(source))
                 .author(parseAuthor(source))
                 .description(parseDescription(source))
@@ -35,12 +37,12 @@ public class PublioBookInfoParser implements BookInfoParser {
         return getTextByAttribute(source, "class", "product-card-title");
     }
 
-    private String parseAuthor(Element source) {
-        return source.getElementsByAttributeValue("class", "product-card-infos")
+    private Author parseAuthor(Element source) {
+        return authorsCache.getAuthorFromCache(source.getElementsByAttributeValue("class", "product-card-infos")
                 .get(0)
                 .child(0)
                 .child(1)
-                .text();
+                .text());
     }
 
     private String parseDescription(Element source) {

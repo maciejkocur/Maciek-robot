@@ -1,7 +1,9 @@
 package io.github.bookcrawler.core.impl.packtparser;
 
+import io.github.bookcrawler.cache.AuthorsCache;
 import io.github.bookcrawler.core.BookInfoParser;
 import io.github.bookcrawler.core.impl.SourceScrappingResult;
+import io.github.bookcrawler.entities.Author;
 import io.github.bookcrawler.entities.BookInfo;
 import io.github.bookcrawler.entities.BookInfoBuilder;
 import org.jsoup.nodes.Document;
@@ -15,7 +17,7 @@ import java.util.Calendar;
 public class PacktBookInfoParser implements BookInfoParser {
 
     @Autowired
-    private BookInfoBuilder bookInfoBuilder;
+    AuthorsCache authorsCache;
 
     private static final String LIBRARY_NAME = "Packt";
     private static final String PRICE = "free";
@@ -26,7 +28,7 @@ public class PacktBookInfoParser implements BookInfoParser {
     @Override
     public BookInfo parse(SourceScrappingResult sourceScrappingResult) {
         Document document = sourceScrappingResult.getSource();
-        return bookInfoBuilder.
+        return new BookInfoBuilder().
                 title(getTitle(document))
                 .url(getLocation(document))
                 .author(getAuthor(document))
@@ -45,8 +47,8 @@ public class PacktBookInfoParser implements BookInfoParser {
         return document.getElementsByClass(className);
     }
 
-    private String getAuthor(Document document) {
-        return getClassElements(document, AUTHOR_CLASS_NAME).get(0).ownText();
+    private Author getAuthor(Document document) {
+        return authorsCache.getAuthorFromCache(getClassElements(document, AUTHOR_CLASS_NAME).get(0).ownText());
     }
 
     private String getLocation(Document document) {

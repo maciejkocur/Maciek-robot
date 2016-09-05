@@ -1,17 +1,9 @@
 package io.github.bookcrawler.core.impl.empik;
 
-import io.github.bookcrawler.config.ServletContextConfig;
 import io.github.bookcrawler.core.SourceScrapper;
 import io.github.bookcrawler.core.impl.SourceScrappingResult;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.testng.annotations.Test;
 
 import java.io.File;
@@ -21,19 +13,14 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.testng.Assert.assertEquals;
 
-@WebAppConfiguration
-@ContextConfiguration(classes = {ServletContextConfig.class})
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
-public class EmpikBookLinksCrawlerTest extends AbstractTestNGSpringContextTests {
+public class EmpikBookLinksCrawlerTest {
 
-    @Autowired
-    EmpikBookLinksCrawler empikBookLinksCrawler;
-
-
-  @Test
+    @Test
     public void crawlEmpikSite() throws Exception {
 
-      String testUrl = "test";
+        // given
+        EmpikBookLinksCrawler empikBookLinksCrawler = new EmpikBookLinksCrawler();
+        String testUrl = "test";
 
         SourceScrapper sourceScrapperMock = mock(SourceScrapper.class);
         SourceScrappingResult sourceScrappingResultMock = mock(SourceScrappingResult.class);
