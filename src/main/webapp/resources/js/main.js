@@ -2,31 +2,31 @@
 $(document).ready(function () {
 
     $('th').click(function () {
-        var table = $(this).parents('table').eq(0)
-        var rows = table.find('tr:gt(0)').toArray().sort(comparer($(this).index()))
-        this.asc = !this.asc
+        var table = $(this).parents('table').eq(0);
+        var rows = table.find('tr:gt(0)').toArray().sort(comparer($(this).index()));
+        this.asc = !this.asc;
         if (!this.asc) {
-            rows = rows.reverse()
+            rows = rows.reverse();
         }
         for (var i = 0; i < rows.length; i++) {
-            table.append(rows[i])
+            table.append(rows[i]);
         }
-    })
+    });
     function comparer(index) {
         return function (a, b) {
-            var valA = getCellValue(a, index), valB = getCellValue(b, index)
-            return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.localeCompare(valB)
+            var valA = getCellValue(a, index), valB = getCellValue(b, index);
+            return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.localeCompare(valB);
         }
     }
 
     function getCellValue(row, index) {
-        return $(row).children('td').eq(index).html()
+        return $(row).children('td').eq(index).html();
     }
 
     $(".search").keyup(function () {
         var searchTerm = $(".search").val();
         var listItem = $('.results tbody').children('tr');
-        var searchSplit = searchTerm.replace(/ /g, "'):containsi('")
+        var searchSplit = searchTerm.replace(/ /g, "'):containsi('");
 
         $.extend($.expr[':'], {
             'containsi': function (elem, i, match, array) {
