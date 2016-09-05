@@ -26,7 +26,7 @@ public class EmpikBookInfoParser implements BookInfoParser {
                 .description(parseDescription(source))
                 .price(parsePrice(source))
                 .library("EMPIK")
-                .url("http://www.empik.com")
+                .url(source.location())
                 .inputDate(Calendar.getInstance().getTime().getTime())
                 .build();
     }
