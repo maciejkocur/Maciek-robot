@@ -1,6 +1,5 @@
 package io.github.bookcrawler.controllers;
 
-import io.github.bookcrawler.core.BookStore;
 import io.github.bookcrawler.core.DiscountFetchingService;
 import io.github.bookcrawler.entities.BookInfo;
 import org.springframework.stereotype.Controller;
@@ -11,7 +10,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.StreamSupport;
 
 @Controller
 public class DiscountFetchingController {
@@ -20,13 +18,9 @@ public class DiscountFetchingController {
     public String hello(Model model) throws IOException {
         List<BookInfo> list = new ArrayList<>();
 
-        List<BookStore> bookStores = new ArrayList<>();
-        bookStores.add(BookStore.EMPIK);
-        bookStores.add(BookStore.PACKT);
-        bookStores.add(BookStore.HELION);
-        Collection<BookInfo> bookInfos = new DiscountFetchingService().fetch(bookStores);
+        Collection<BookInfo> bookInfos = new DiscountFetchingService().getAllBooks();
 
-        StreamSupport.stream(bookInfos.spliterator(),false).forEach(list::add);
+        bookInfos.stream().forEach(list::add);
         model.addAttribute("books", list);
 
         return "index";
