@@ -1,8 +1,10 @@
 package io.github.bookcrawler.entities;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.io.Serializable;
-import java.util.Set;
 
 @Entity
 public class Profile implements Serializable {

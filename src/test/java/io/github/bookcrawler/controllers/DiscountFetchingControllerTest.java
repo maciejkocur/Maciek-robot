@@ -19,10 +19,10 @@ public class DiscountFetchingControllerTest {
     private DiscountFetchingController controller;
 
     @BeforeMethod
-    public void prepareController(){
+    public void prepareController() {
         controller = new DiscountFetchingController();
         DatabaseCacheForDifferentLibraries mockCache = mock(DatabaseCacheForDifferentLibraries.class);
-        when(mockCache.getAllBookInfos()).thenReturn(Collections.EMPTY_LIST);
+        when(mockCache.getAllBookInfos()).thenReturn(Collections.emptyList());
         controller.databaseCacheForDifferentLibraries = mockCache;
     }
 

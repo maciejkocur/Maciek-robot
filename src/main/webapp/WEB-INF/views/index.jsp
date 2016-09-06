@@ -24,8 +24,6 @@
                         <li><a href="../fetch/PUBLIO">Publio</a></li>
                         <li><a href="../fetch/PACT">Pact</a></li>
                         <li><a href="../fetch/HELION">Helion</a></li>
-                        <li class="divider"></li>
-                        <li><a href="../fetch/All">All libraries</a></li>
                     </ul>
                 </li>
                 <form class="navbar-form navbar-left">
