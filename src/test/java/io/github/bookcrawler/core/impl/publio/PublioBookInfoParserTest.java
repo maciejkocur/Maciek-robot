@@ -2,21 +2,24 @@ package io.github.bookcrawler.core.impl.publio;
 
 import io.github.bookcrawler.cache.AuthorsCache;
 import io.github.bookcrawler.core.impl.SourceScrappingResult;
+import io.github.bookcrawler.core.impl.SourceScrappingStatus;
 import io.github.bookcrawler.entities.Author;
 import io.github.bookcrawler.entities.BookInfo;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import java.io.File;
 import java.io.IOException;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static org.testng.Assert.assertEquals;
 
 public class PublioBookInfoParserTest {
+
+
     @DataProvider
     public Object[][] books() {
         return new Object[][]{
@@ -34,19 +37,18 @@ public class PublioBookInfoParserTest {
         when(authorsCache.getAuthorFromCache(author)).thenReturn(new Author(author));
         Document testedSource = Jsoup.parse(new File(path), "UTF-8");
 
-        SourceScrappingResult sourceScrappingResultMock = mock(SourceScrappingResult.class);
-        when(sourceScrappingResultMock.isSuccessful()).thenReturn(true);
-        when(sourceScrappingResultMock.getSource()).thenReturn(testedSource);
+        SourceScrappingResult sourceScrappingResult = new SourceScrappingResult(testedSource, SourceScrappingStatus.SUCCESS);
 
         // when
-        BookInfo parseBookInfo = publioBookInfoParser.parse(sourceScrappingResultMock);
+        BookInfo parseBookInfo = publioBookInfoParser.parse(sourceScrappingResult);
 
         // then
-        assertEquals(parseBookInfo.getTitle(), title);
-        assertEquals(parseBookInfo.getAuthor(), author);
-        assertEquals(parseBookInfo.getDescription().substring(0, 40), description);
-        assertEquals(parseBookInfo.getPrice(), price);
-        assertEquals(parseBookInfo.getLibrary(), library);
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(parseBookInfo.getTitle(), title);
+        softAssert.assertEquals(parseBookInfo.getAuthor(), author);
+        softAssert.assertEquals(parseBookInfo.getDescription().substring(0, 40), description);
+        softAssert.assertEquals(parseBookInfo.getPrice(), price);
+        softAssert.assertEquals(parseBookInfo.getLibrary(), library);
+        softAssert.assertAll();
     }
-
 }

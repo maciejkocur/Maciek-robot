@@ -2,6 +2,7 @@ package io.github.bookcrawler.core.impl.packtparser;
 
 import io.github.bookcrawler.cache.AuthorsCache;
 import io.github.bookcrawler.core.impl.SourceScrappingResult;
+import io.github.bookcrawler.core.impl.SourceScrappingStatus;
 import io.github.bookcrawler.entities.Author;
 import io.github.bookcrawler.entities.BookInfo;
 import org.jsoup.Jsoup;
@@ -20,11 +21,13 @@ public class PacktBookInfoParserTest {
 
     @Test
     public void testParsingBookElementsFromDocument() throws IOException {
-
         //given
         PacktBookInfoParser packtBookInfoParser = new PacktBookInfoParser();
         AuthorsCache authorsCache = mock(AuthorsCache.class);
         packtBookInfoParser.authorsCache = authorsCache;
+        Document source = Jsoup.parse(new File("src/test/java/io/github/bookcrawler/core/" +
+                "impl/packtparser/mastering_casandra_packt.html"), "UTF-8");
+        SourceScrappingResult sourceScrappingResult = new SourceScrappingResult(source, SourceScrappingStatus.SUCCESS);
 
         String expectedTitle = "Mastering Apache Cassandra";
         String expectedAuthor = "Nishant Neeraj";
@@ -33,13 +36,8 @@ public class PacktBookInfoParserTest {
                 "to help you get the most out of your infrastructure and using the full potential of Cassandra.";
         String expectedPrice = "free";
         String expectedLibrary = "Packt";
-        Document source = Jsoup.parse(new File("src/test/java/io/github/bookcrawler/core/" +
-                "impl/packtparser/mastering_casandra_packt.html"), "UTF-8");
-        SourceScrappingResult sourceScrappingResult = mock(SourceScrappingResult.class);
 
         when(authorsCache.getAuthorFromCache(expectedAuthor)).thenReturn(new Author(expectedAuthor));
-        when(sourceScrappingResult.isSuccessful()).thenReturn(true);
-        when(sourceScrappingResult.getSource()).thenReturn(source);
 
         //when
         BookInfo book = packtBookInfoParser.parse(sourceScrappingResult);

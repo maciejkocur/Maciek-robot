@@ -3,15 +3,10 @@ package io.github.bookcrawler.core.impl.publio;
 import io.github.bookcrawler.cache.AuthorsCache;
 import io.github.bookcrawler.core.BookInfoParser;
 import io.github.bookcrawler.core.impl.SourceScrappingResult;
-import io.github.bookcrawler.entities.Author;
 import io.github.bookcrawler.entities.BookInfo;
 import io.github.bookcrawler.entities.BookInfoBuilder;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.Calendar;
 
 @Component
 public class PublioBookInfoParser implements BookInfoParser {
@@ -21,42 +16,13 @@ public class PublioBookInfoParser implements BookInfoParser {
 
     @Override
     public BookInfo parse(SourceScrappingResult sourceScrappingResult) {
-        Document source = sourceScrappingResult.getSource();
         return new BookInfoBuilder()
-                .title(parseTitle(source))
-                .author(parseAuthor(source))
-                .description(parseDescription(source))
-                .price(parsePrice(source))
+                .title(sourceScrappingResult.parsePublioTitle())
+                .author(authorsCache.getAuthorFromCache(sourceScrappingResult.parsePublioAuthor().replaceAll("[^A-Za-z\\p{L}]", " ").trim()))
+                .description(sourceScrappingResult.parsePublioDescription())
+                .price(sourceScrappingResult.parsePublioPrice())
                 .library("PUBLIO")
-                .url(source.location())
-                .inputDate(Calendar.getInstance().getTime().getTime())
+                .url(sourceScrappingResult.location())
                 .build();
-    }
-
-    private String parseTitle(Element source) {
-        return getTextByAttribute(source, "class", "product-card-title");
-    }
-
-    private Author parseAuthor(Element source) {
-        return authorsCache.getAuthorFromCache(source.getElementsByAttributeValue("class", "product-card-infos")
-                .get(0)
-                .child(0)
-                .child(1)
-                .text());
-    }
-
-    private String parseDescription(Element source) {
-        return getTextByAttribute(source, "id", "product-card-publication-description");
-    }
-
-    private String parsePrice(Element source) {
-        return getTextByAttribute(source, "class", "product-card-price-promotion");
-    }
-
-    private String getTextByAttribute(Element source, String attr, String value) {
-        return source
-                .getElementsByAttributeValue(attr, value)
-                .get(0)
-                .text();
     }
 }
