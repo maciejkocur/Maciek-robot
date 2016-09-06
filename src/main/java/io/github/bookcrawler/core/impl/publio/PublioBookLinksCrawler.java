@@ -15,6 +15,10 @@ import java.util.stream.Collectors;
 import static io.github.bookcrawler.core.BookStore.PUBLIO;
 
 public class PublioBookLinksCrawler implements BooksLinkCrawler {
+
+    public static final int ZERO_INDEX = 0;
+    public static final int SIX_INDEX = 6;
+
     @Override
     public List<String> crawl(String url, SourceScrapper sourceScrapper) {
 
@@ -38,6 +42,7 @@ public class PublioBookLinksCrawler implements BooksLinkCrawler {
 
         ArrayList<String> pageUrls = new ArrayList<>();
         pageUrls.add(url);
+        
         for (int i = 1; i < pages; i++) {
             String nextUrl = getNextUrl(source);
             pageUrls.add(nextUrl);
@@ -53,7 +58,7 @@ public class PublioBookLinksCrawler implements BooksLinkCrawler {
     private String getNextUrl(Document source) {
         return getLink(source
                 .getElementsByAttributeValue("class", "pages-list")
-                .get(0)
+                .get(ZERO_INDEX)
                 .getElementsByAttributeValue("class", "page page--next")
                 .attr("href"));
     }
@@ -61,9 +66,9 @@ public class PublioBookLinksCrawler implements BooksLinkCrawler {
     private Integer getPageQuantity(Document source) {
         return Integer.valueOf(source
                 .getElementsByAttributeValue("class", "pages-list")
-                .get(0)
+                .get(ZERO_INDEX)
                 .children()
-                .get(6)
+                .get(SIX_INDEX)
                 .text());
     }
 
