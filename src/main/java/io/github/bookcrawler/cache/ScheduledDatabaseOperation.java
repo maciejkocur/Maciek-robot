@@ -8,7 +8,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import java.util.EnumSet;
 
 
@@ -27,21 +26,11 @@ public class ScheduledDatabaseOperation {
     @Autowired
     BookInfoRepository bookInfoRepository;
 
-    @PostConstruct
-    public void init() {
+    @Scheduled(cron = "0 18 12 * * ?")
+    private void schedulerJob() {
         authorsCache.saveAuthorsFromDBInCache();
         EnumSet.allOf(Library.class).stream().
                 forEach(libraries -> databaseCacheForDifferentLibraries.putBookInfoFromLibrary(libraries.toString(), discountFetchingService.getBooksFromLibrary(libraries)));
         bookInfoRepository.save(databaseCacheForDifferentLibraries.getAllBookInfos());
     }
-
-
-    @Scheduled(cron = "0 0/30 * * * ?")
-    public void saveDataInDBAndCaches() {
-        authorsCache.saveAuthorsFromDBInCache();
-        EnumSet.allOf(Library.class).stream().
-                forEach(libraries -> databaseCacheForDifferentLibraries.putBookInfoFromLibrary(libraries.toString(), discountFetchingService.getBooksFromLibrary(libraries)));
-        bookInfoRepository.save(discountFetchingService.getAllBooks());
-    }
-
 }

@@ -10,14 +10,10 @@
 <body>
 <div class="container-fluid">
     <div class="masthead buffer">
-    <c:choose>
-        <c:when test="${!books.isEmpty()}">
-           <h3 class="text-muted">Books from ${books.iterator().next().getLibrary()}</h3>
-        </c:when>
-        <c:otherwise>
-           <h3 class="text-muted"> ${isEmpty}</h3>
-        </c:otherwise>
-    </c:choose>
+
+        <h3 class="text-muted">Books from ${books.iterator().next().getLibrary()}</h3>
+
+
     </div>
     <div class="table-responsive">
         <div class="form-group pull-right">
