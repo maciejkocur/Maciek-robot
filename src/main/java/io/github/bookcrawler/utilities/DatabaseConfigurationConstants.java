@@ -16,5 +16,4 @@ public class DatabaseConfigurationConstants {
     public static final String REPOSITORIES_PACKAGE = "io.github.bookcrawler.repositories";
 
     public static final String CLASSPATH_TO_RESOURCES = "classpath:/application.properties";
-    ;
 }
