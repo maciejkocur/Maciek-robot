@@ -16,6 +16,13 @@
         </layout>
     </appender>
 
+    <logger name="org.springframework" level="info" additivity="false">
+        <appender-ref ref="STDOUT" />
+    </logger>
+
+    <logger name="org.hibernate.type" level="ALL" />
+    <logger name="org.hibernate" level="INFO" />
+
     <root level="debug">
         <appender-ref ref="STDOUT" />
         <appender-ref ref="FILE" />

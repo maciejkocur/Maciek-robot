@@ -13,4 +13,6 @@ public interface BookInfoRepository extends JpaRepository<BookInfo, Long> {
     List<BookInfo> findByInputDate(Date inputDate);
 
     List<BookInfo> findByInputDateBetween(Date startDate, Date endDate);
+
+    List<BookInfo> findByLibraryAndInputDate(String library,Date inputDate);
 }
