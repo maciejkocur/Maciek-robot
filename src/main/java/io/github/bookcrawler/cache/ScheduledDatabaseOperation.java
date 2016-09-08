@@ -26,7 +26,7 @@ public class ScheduledDatabaseOperation {
     @Autowired
     BookInfoRepository bookInfoRepository;
 
-    @Scheduled(cron = "0 18 12 * * ?")
+    @Scheduled(cron = "0 0 12 * * ?")
     private void schedulerJob() {
         authorsCache.saveAuthorsFromDBInCache();
         EnumSet.allOf(Library.class).stream().

@@ -37,11 +37,11 @@ public class DiscountFetchingController {
         List<BookInfo> bookInfoList = databaseCacheForDifferentLibraries.getBookInfosFromLibrary(library);
         if (bookInfoList.isEmpty()) {
             bookInfoList = bookInfoRepository.findByLibraryAndInputDate(library, new java.sql.Date(new java.util.Date().getTime()));
-            databaseCacheForDifferentLibraries.putBookInfoFromLibrary(library, bookInfoList);
-            model.addAttribute("isEmpty", "Please wait! Parser is working.....Refresh page in a couple of minutes!");
-        } else {
-            model.addAttribute("isEmpty", "");
+            if (bookInfoList.isEmpty()) {
+                bookInfoList = discountFetchingService.getBooksFromLibrary(Library.valueOf(library));
+            }
         }
+        databaseCacheForDifferentLibraries.putBookInfoFromLibrary(library, bookInfoList);
         model.addAttribute("books", bookInfoList);
         return "booksResult";
     }

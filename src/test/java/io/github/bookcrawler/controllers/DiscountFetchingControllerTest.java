@@ -3,7 +3,6 @@ package io.github.bookcrawler.controllers;
 import io.github.bookcrawler.cache.DatabaseCacheForDifferentLibraries;
 import io.github.bookcrawler.core.DiscountFetchingService;
 import io.github.bookcrawler.repositories.BookInfoRepository;
-import io.github.bookcrawler.utilities.Library;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -12,11 +11,9 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.sql.Date;
 import java.util.Collections;
 
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyObject;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
