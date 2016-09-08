@@ -16,6 +16,8 @@ Maciek
 Run in root directory: `mvn clean install tomcat7:run`
 
 Next in your web browser type: `http://localhost:8080/`
+Note! When you start the server FIRST time, it will takes time to retrieve information about books,
+every library takes about 2-3 minutes. 
 
 
 ## Perks

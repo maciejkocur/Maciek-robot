@@ -1,6 +1,9 @@
 package io.github.bookcrawler.core.impl.helionparser;
 
+import io.github.bookcrawler.cache.AuthorsCache;
 import io.github.bookcrawler.core.impl.SourceScrappingResult;
+import io.github.bookcrawler.core.impl.SourceScrappingStatus;
+import io.github.bookcrawler.entities.Author;
 import io.github.bookcrawler.entities.BookInfo;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -20,18 +23,21 @@ public class HelionBookParserTest {
     public void testParsingBookElementsFromDocument() throws IOException {
         //given
         HelionBookParser helionBookParser = new HelionBookParser();
-        SourceScrappingResult sourceScrappingResult = mock(SourceScrappingResult.class);
+        AuthorsCache authorsCache = mock(AuthorsCache.class);
+        helionBookParser.authorsCache = authorsCache;
         Document source = Jsoup.parse(new File("src/test/java/io/github/bookcrawler/core/" +
                 "impl/helionparser/helion_promo_of_the_day.html"), "UTF-8");
+        SourceScrappingResult sourceScrappingResult = new SourceScrappingResult(source, SourceScrappingStatus.SUCCESS);
 
-        //when
         String expectedTitle = "Sprint projektowy. Tworzenie produkt�w cyfrowych";
         String expectedAuthor = "Richard Banfield C. Todd Lombardo Trace Wax";
         String expectedDescription = "Sprintem do sukcesu!";
         String expectedPrice = "30% discount";
         String expectedLibrary = "Helion";
-        when(sourceScrappingResult.isSuccessful()).thenReturn(true);
-        when(sourceScrappingResult.getSource()).thenReturn(source);
+
+        when(authorsCache.getAuthorFromCache(expectedAuthor)).thenReturn(new Author(expectedAuthor));
+
+        //when
         BookInfo book = helionBookParser.parse(sourceScrappingResult);
 
         //then

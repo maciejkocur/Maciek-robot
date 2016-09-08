@@ -16,6 +16,7 @@ import static org.mockito.Mockito.when;
 
 
 public class PacktBooksCrawlerTest {
+
     @Test
     public void checkIfCrawlerReturnsLinkToBook() throws IOException {
         //given

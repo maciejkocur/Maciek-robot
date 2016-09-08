@@ -1,5 +1,6 @@
 package io.github.bookcrawler.entities;
 
+import java.sql.Date;
 import java.util.Set;
 
 public class BookInfoBuilder {
@@ -9,7 +10,8 @@ public class BookInfoBuilder {
     String price;
     String library;
     String url;
-    String author;
+    Date inputDate;
+    Author author;
     Set<Tag> tags;
 
     public BookInfoBuilder title(String title) {
@@ -21,7 +23,6 @@ public class BookInfoBuilder {
         this.description = description;
         return this;
     }
-
 
     public BookInfoBuilder price(String price) {
         this.price = price;
@@ -38,13 +39,18 @@ public class BookInfoBuilder {
         return this;
     }
 
-    public BookInfoBuilder author(String author) {
-        this.author = author;
+    public BookInfoBuilder author(Author authorName) {
+        this.author = authorName;
         return this;
     }
 
     public BookInfoBuilder tags(Set<Tag> tags) {
         this.tags = tags;
+        return this;
+    }
+
+    public BookInfoBuilder inputDate(Long inputDate) {
+        this.inputDate = new Date(inputDate);
         return this;
     }
 

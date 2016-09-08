@@ -1,49 +1,28 @@
 package io.github.bookcrawler.core.impl.empik;
 
+import io.github.bookcrawler.cache.AuthorsCache;
 import io.github.bookcrawler.core.BookInfoParser;
 import io.github.bookcrawler.core.impl.SourceScrappingResult;
 import io.github.bookcrawler.entities.BookInfo;
 import io.github.bookcrawler.entities.BookInfoBuilder;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-import static io.github.bookcrawler.core.BookStore.EMPIK;
-
+@Component
 public class EmpikBookInfoParser implements BookInfoParser {
+
+    @Autowired
+    AuthorsCache authorsCache;
 
     @Override
     public BookInfo parse(SourceScrappingResult sourceScrappingResult) {
-        Document source = sourceScrappingResult.getSource();
         return new BookInfoBuilder()
-                .title(parseTitle(source))
-                .author(parseAuthor(source))
-                .description(parseDescription(source))
-                .price(parsePrice(source))
-                .library(EMPIK.toString())
-                .url(EMPIK.domainUrl())
+                .title(sourceScrappingResult.parseEmpikTitle())
+                .author(authorsCache.getAuthorFromCache(sourceScrappingResult.parseEmpikAuthor().replaceAll("[^A-Za-z\\p{L}]", " ").trim()))
+                .description(sourceScrappingResult.parseEmpikDescription())
+                .price(sourceScrappingResult.parseEmpikPrice())
+                .library("EMPIK")
+                .url(sourceScrappingResult.location())
                 .build();
-    }
-
-    private String parseTitle(Element source) {
-        return getTextByAttribute(source, "productMainTitle");
-    }
-
-    private String parseAuthor(Element source) {
-        return getTextByAttribute(source, "pDAuthorList");
-    }
-
-    private String parseDescription(Element source) {
-        return getTextByAttribute(source, "contentPacketText longDescription");
-    }
-
-    private String parsePrice(Element source) {
-        return getTextByAttribute(source, "currentPrice");
-    }
-
-    private String getTextByAttribute(Element source, String attribute) {
-        return source
-                .getElementsByAttributeValue("class", attribute)
-                .get(0)
-                .text();
     }
 }

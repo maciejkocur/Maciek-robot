@@ -1,30 +1,35 @@
 package io.github.bookcrawler.core.impl.packtparser;
 
 import io.github.bookcrawler.core.BookExtractor;
+import io.github.bookcrawler.core.BookStore;
 import io.github.bookcrawler.core.SourceScrapper;
 import io.github.bookcrawler.core.impl.SourceScrappingResult;
 import io.github.bookcrawler.entities.BookInfo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static io.github.bookcrawler.core.BookStore.PACKT;
-
+@Component
 public class PacktBookExtractor implements BookExtractor {
 
-    private SourceScrapper sourceScrapper;
+    @Autowired
+    private PacktBookInfoParser packtBookInfoParser;
 
-    public PacktBookExtractor(SourceScrapper sourceScrapper) {
-        this.sourceScrapper = sourceScrapper;
-    }
+    @Autowired
+    private BookStore packtBookStore;
+
+    @Autowired
+    private SourceScrapper jsoupSourceScapper;
 
     @Override
     public List<BookInfo> extract() {
-        return PACKT.crawler().crawl(PACKT.startUrl(), sourceScrapper)
+        return packtBookStore.crawler().crawl(packtBookStore.startUrl(), jsoupSourceScapper)
                 .stream()
-                .map(sourceScrapper::scrap)
+                .map(jsoupSourceScapper::scrap)
                 .filter(SourceScrappingResult::isSuccessful)
-                .map(PACKT.parser()::parse)
+                .map(packtBookInfoParser::parse)
                 .collect(Collectors.toList());
     }
 }

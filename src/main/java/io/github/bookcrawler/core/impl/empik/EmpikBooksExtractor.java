@@ -1,30 +1,34 @@
 package io.github.bookcrawler.core.impl.empik;
 
 import io.github.bookcrawler.core.BookExtractor;
+import io.github.bookcrawler.core.BookStore;
 import io.github.bookcrawler.core.SourceScrapper;
 import io.github.bookcrawler.core.impl.SourceScrappingResult;
 import io.github.bookcrawler.entities.BookInfo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static io.github.bookcrawler.core.BookStore.EMPIK;
-
+@Component
 public class EmpikBooksExtractor implements BookExtractor {
 
-    private SourceScrapper sourceScrapper;
+    @Autowired
+    private EmpikBookInfoParser empikBookInfoParser;
 
-    public EmpikBooksExtractor(SourceScrapper sourceScrapper) {
-        this.sourceScrapper = sourceScrapper;
-    }
+    @Autowired
+    private BookStore empikBookStore;
+
+    @Autowired
+    private SourceScrapper jsoupSourceScapper;
 
     @Override
     public List<BookInfo> extract() {
-        return EMPIK.crawler().crawl(EMPIK.startUrl(), sourceScrapper)
-                .parallelStream()
-                .map(sourceScrapper::scrap)
+        return empikBookStore.crawler().crawl(empikBookStore.startUrl(), jsoupSourceScapper).parallelStream()
+                .map(url -> jsoupSourceScapper.scrap(url))
                 .filter(SourceScrappingResult::isSuccessful)
-                .map(EMPIK.parser()::parse)
+                .map(sourceScrappingResult -> empikBookInfoParser.parse(sourceScrappingResult))
                 .collect(Collectors.toList());
     }
 }

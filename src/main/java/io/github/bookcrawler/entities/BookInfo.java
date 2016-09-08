@@ -2,13 +2,14 @@ package io.github.bookcrawler.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Date;
 import java.util.Set;
 
 @Entity
-//TODO remeber to add Date field and create index on it
 public class BookInfo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "BOOK_ID")
     private Long ID;
 
     private String title;
@@ -22,9 +23,13 @@ public class BookInfo implements Serializable {
 
     private String url;
 
-    private String author;
+    @ManyToOne
+    @JoinColumn(name = "author_id")
+    private Author author;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    private Date inputDate;
+
+    @ManyToMany
     private Set<Tag> tags;
 
     private BookInfo() {
@@ -37,6 +42,7 @@ public class BookInfo implements Serializable {
         this.url = bookInfoBuilder.url;
         this.library = bookInfoBuilder.library;
         this.author = bookInfoBuilder.author;
+        this.inputDate = bookInfoBuilder.inputDate;
         this.tags = bookInfoBuilder.tags;
     }
 
@@ -50,7 +56,7 @@ public class BookInfo implements Serializable {
 
 
     public String getAuthor() {
-        return author;
+        return author.getName();
     }
 
     public String getDescription() {
@@ -70,7 +76,26 @@ public class BookInfo implements Serializable {
         return library;
     }
 
+    public Date getInputDate() {
+        return inputDate;
+    }
+
     public Set<Tag> getTags() {
         return tags;
+    }
+
+    @Override
+    public String toString() {
+        return "BookInfo{" +
+                "ID=" + ID +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", price='" + price + '\'' +
+                ", library='" + library + '\'' +
+                ", url='" + url + '\'' +
+                ", author=" + author +
+                ", inputDate=" + inputDate +
+                ", tags=" + tags +
+                '}';
     }
 }
