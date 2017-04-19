@@ -3,26 +3,27 @@ package io.github.bookcrawler.core.impl.helionparser;
 import io.github.bookcrawler.core.BookExtractor;
 import io.github.bookcrawler.core.SourceScrapper;
 import io.github.bookcrawler.entities.BookInfo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Collections;
 import java.util.List;
 
-import static io.github.bookcrawler.core.BookStore.HELION;
-
+@Component
 public class HelionBookExtractor implements BookExtractor {
 
-    private SourceScrapper sourceScrapper;
+    @Autowired
+    private HelionBookParser helionBookParser;
 
-    public HelionBookExtractor(SourceScrapper sourceScrapper) {
-        this.sourceScrapper = sourceScrapper;
-    }
+    @Autowired
+    private SourceScrapper jsoupSourceScapper;
+
 
     @Override
     public List<BookInfo> extract() {
-
         return Collections.singletonList(
-                HELION.parser().parse(
-                        sourceScrapper.scrap(
-                                HELION.startUrl())));
+                helionBookParser.parse(
+                        jsoupSourceScapper.scrap(
+                                "http://helion.pl/promocja-dnia")));
     }
 }

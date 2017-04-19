@@ -6,8 +6,16 @@ import io.github.bookcrawler.entities.BookInfo;
 import io.github.bookcrawler.entities.BookInfoBuilder;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import java.util.Calendar;
+
+@Component
 public class HelionBookParser implements BookInfoParser {
+
+    @Autowired
+    private BookInfoBuilder bookInfoBuilder;
 
     private static final String TITLE_CLASS_NAME = "title-group";
     private static final String PRICE = "30% discount";
@@ -18,13 +26,15 @@ public class HelionBookParser implements BookInfoParser {
     public BookInfo parse(SourceScrappingResult sourceScrappingResult) {
         if (sourceScrappingResult.isSuccessful()) {
         Document document = sourceScrappingResult.getSource();
-        return new BookInfoBuilder()
+        return bookInfoBuilder
                 .title(getTitle(document))
                 .url(document.location())
                 .author(getAuthor(document))
                 .description(getDescription(document))
                 .library(getLibrary(document))
-                .price(PRICE).build();
+                .price(PRICE)
+                .inputDate(Calendar.getInstance().getTime().getTime())
+                .build();
         }
         return new BookInfoBuilder().build();
     }

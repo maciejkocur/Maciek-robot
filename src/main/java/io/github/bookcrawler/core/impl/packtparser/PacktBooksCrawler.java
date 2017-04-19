@@ -4,10 +4,12 @@ import io.github.bookcrawler.core.BooksLinkCrawler;
 import io.github.bookcrawler.core.SourceScrapper;
 import io.github.bookcrawler.core.impl.SourceScrappingResult;
 import org.jsoup.nodes.Document;
+import org.springframework.stereotype.Component;
 
 import java.util.Collections;
 import java.util.List;
 
+@Component
 public class PacktBooksCrawler implements BooksLinkCrawler {
 
     private static final String BOOK_LINK_CLASS_NAME = "dotd-main-book-image";

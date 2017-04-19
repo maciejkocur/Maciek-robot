@@ -1,4 +1,4 @@
-package io.github.bookcrawler.core.impl.packtparser;
+package io.github.bookcrawler.core.impl.publio;
 
 import io.github.bookcrawler.core.BookExtractor;
 import io.github.bookcrawler.core.BookStore;
@@ -12,24 +12,24 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class PacktBookExtractor implements BookExtractor {
+public class PublioBooksExtractor implements BookExtractor {
 
     @Autowired
-    private PacktBookInfoParser packtBookInfoParser;
+    private PublioBookInfoParser publioBookInfoParser;
 
     @Autowired
-    private BookStore packtBookStore;
+    private BookStore publioBookStore;
 
     @Autowired
     private SourceScrapper jsoupSourceScapper;
 
+
     @Override
     public List<BookInfo> extract() {
-        return packtBookStore.crawler().crawl(packtBookStore.startUrl(), jsoupSourceScapper)
-                .stream()
-                .map(jsoupSourceScapper::scrap)
+        return publioBookStore.crawler().crawl(publioBookStore.startUrl(), jsoupSourceScapper).parallelStream()
+                .map(url -> jsoupSourceScapper.scrap(url))
                 .filter(SourceScrappingResult::isSuccessful)
-                .map(packtBookInfoParser::parse)
+                .map(sourceScrappingResult -> publioBookInfoParser.parse(sourceScrappingResult))
                 .collect(Collectors.toList());
     }
 }

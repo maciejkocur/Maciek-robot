@@ -1,4 +1,4 @@
-package io.github.bookcrawler.core.impl.empik;
+package io.github.bookcrawler.core.impl.publio;
 
 import io.github.bookcrawler.core.BookInfoParser;
 import io.github.bookcrawler.core.impl.SourceScrappingResult;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import java.util.Calendar;
 
 @Component
-public class EmpikBookInfoParser implements BookInfoParser {
+public class PublioBookInfoParser implements BookInfoParser {
 
     @Autowired
     private BookInfoBuilder bookInfoBuilder;
@@ -25,31 +25,35 @@ public class EmpikBookInfoParser implements BookInfoParser {
                 .author(parseAuthor(source))
                 .description(parseDescription(source))
                 .price(parsePrice(source))
-                .library("EMPIK")
-                .url("http://www.empik.com")
+                .library("PUBLIO")
+                .url(source.location())
                 .inputDate(Calendar.getInstance().getTime().getTime())
                 .build();
     }
 
     private String parseTitle(Element source) {
-        return getTextByAttribute(source, "productMainTitle");
+        return getTextByAttribute(source, "class", "product-card-title");
     }
 
     private String parseAuthor(Element source) {
-        return getTextByAttribute(source, "pDAuthorList").replaceAll("[^A-Za-z\\p{L}]", " ").trim();
+        return source.getElementsByAttributeValue("class", "product-card-infos")
+                .get(0)
+                .child(0)
+                .child(1)
+                .text();
     }
 
     private String parseDescription(Element source) {
-        return getTextByAttribute(source, "contentPacketText longDescription");
+        return getTextByAttribute(source, "id", "product-card-publication-description");
     }
 
     private String parsePrice(Element source) {
-        return getTextByAttribute(source, "currentPrice");
+        return getTextByAttribute(source, "class", "product-card-price-promotion");
     }
 
-    private String getTextByAttribute(Element source, String attribute) {
+    private String getTextByAttribute(Element source, String attr, String value) {
         return source
-                .getElementsByAttributeValue("class", attribute)
+                .getElementsByAttributeValue(attr, value)
                 .get(0)
                 .text();
     }
